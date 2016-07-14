@@ -1,14 +1,15 @@
 var express = require('express');
 var app = express(); 
 var morgan = require('morgan'); 
+var path = require('path');
 
 var port = process.env.PORT || 3000;
 
-app.use('/assets', express.static(__dirname + '/assets'));
-app.use('/build', express.static(__dirname + '/build'));
+app.use('/assets', express.static(path.join(__dirname + '/../client/assets')));
+app.use('/build', express.static(path.join(__dirname + '/../client/build')));
 
 app.get('/', function(req, res) {
-  res.send('hello world');
+  res.sendFile(path.join(__dirname + '/../client/index.html'));
 });
 
 app.listen(port, function() {

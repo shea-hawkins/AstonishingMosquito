@@ -1,9 +1,19 @@
 import { createStore } from 'redux';
 
-var reducer = function(prevState, action) {
-  return prevState;
+var actions = Object.assign({});
+
+var state = {
+
 };
 
-var store = createStore(reducer);
+var reducer = function(prevState = state, action) {
+  if (actions[action.type]) {
+    return actions[action.type](prevState, action.data);
+  } else {
+    return prevState;
+  }
+};
 
-export default store;
+var Store = createStore(reducer);
+
+export default Store;

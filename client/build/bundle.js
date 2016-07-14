@@ -22707,6 +22707,10 @@
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
+	var _HeaderView = __webpack_require__(196);
+
+	var _HeaderView2 = _interopRequireDefault(_HeaderView);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -22730,11 +22734,7 @@
 	      return _react2.default.createElement(
 	        'div',
 	        null,
-	        _react2.default.createElement(
-	          'span',
-	          null,
-	          'Hello, world.'
-	        )
+	        _react2.default.createElement(_HeaderView2.default, null)
 	      );
 	    }
 	  }]);
@@ -22743,6 +22743,52 @@
 	}(_react2.default.Component);
 
 	exports.default = App;
+
+/***/ },
+/* 196 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = function () {
+	  return _react2.default.createElement(
+	    'header',
+	    null,
+	    _react2.default.createElement(
+	      'div',
+	      null,
+	      _react2.default.createElement(
+	        'span',
+	        null,
+	        'Title'
+	      )
+	    ),
+	    _react2.default.createElement(
+	      'nav',
+	      null,
+	      _react2.default.createElement(
+	        'a',
+	        null,
+	        'Library'
+	      ),
+	      _react2.default.createElement(
+	        'a',
+	        null,
+	        'Game'
+	      )
+	    )
+	  );
+	};
 
 /***/ }
 /******/ ]);

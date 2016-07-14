@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import HeaderView from './resources/stateless/HeaderView.js';
+import HeaderView from './resources/stateless/HeaderView';
 import LibraryView from './resources/libraryView/LibraryView';
+import GameView from './resources/gameView/GameView';
 
 
 var exampleSongs = [
@@ -15,6 +16,7 @@ class App extends React.Component {
     return (
       <div>
         <HeaderView />
+        <GameView />
         <LibraryView songs={exampleSongs} />
       </div>
     )

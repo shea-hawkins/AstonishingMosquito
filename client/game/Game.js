@@ -1,4 +1,4 @@
-import PIXI from 'pixi';
+import PIXI from './lib/pixi.min.js';
 
 class Game {
   constructor (id) {

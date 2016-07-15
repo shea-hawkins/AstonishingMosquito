@@ -41,9 +41,10 @@ var mapDispatchToProps = function(dispatch) {
         })
         .then((songs) => {
           songs = songs.map((song, i) => {
-            // temporary object
-            return {title: song, id: i};
+            song.id = i;
+            return song;
           });
+          console.log(songs);
           dispatch({type: 'receiveSongList', data: songs});
           dispatch({type: 'fetchedSongList', data: null});
         });

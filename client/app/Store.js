@@ -4,6 +4,7 @@ var actions = Object.assign({});
 
 var state = {
   library: {
+    fetching: false,
     songs: [{id: 1, title: 'Song 1'}, {id: 2, title: 'Song 2'}, {id: 3, title: 'Song 3'}]
   }
 };

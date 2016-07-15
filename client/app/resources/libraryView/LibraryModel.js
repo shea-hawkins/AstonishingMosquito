@@ -44,7 +44,6 @@ var mapDispatchToProps = function(dispatch) {
             song.id = i;
             return song;
           });
-          console.log(songs);
           dispatch({type: 'receiveSongList', data: songs});
           dispatch({type: 'fetchedSongList', data: null});
         });

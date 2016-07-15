@@ -9,6 +9,9 @@ router.get('/', function(req, res) {
     fs.readdir(path.join(__dirname + '/../../library'), 'utf8', function(err, files) {
       err ? reject(err) : resolve(files); 
     });
+  })
+  .then(function(songFiles) {
+    res.send(songFiles);
   });
 });
 

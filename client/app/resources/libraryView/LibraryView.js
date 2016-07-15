@@ -3,6 +3,11 @@ import { connection } from './LibraryModel';
 import LibraryItemView from '../stateless/LibraryItemView';
 
 class LibraryView extends React.Component {
+  constructor(props) {
+    super(props);
+    this.props = props;
+    this.props.fetchSongList();
+  }
   render() {
     return (
       <div>

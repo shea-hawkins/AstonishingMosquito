@@ -4,9 +4,9 @@
 
 ## Team
 
-  - __Product Owner__: teamMember
-  - __Scrum Master__: teamMember
-  - __Development Team Members__: teamMember, teamMember
+  - __Architecture and Code Review__: Shea Hawkins
+  - __Git Management and Deployment__: Jay Arella
+  - __Project Management__: Jennifer Ong
 
 ## Table of Contents
 
@@ -25,10 +25,12 @@
 ## Requirements
 
 - Node 0.10.x
-- Redis 2.6.x
-- Postgresql 9.1.x
+- React
+- Redux
+- Pixie
+- Express
 - etc
-- etc
+
 
 ## Development
 

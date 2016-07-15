@@ -7,7 +7,11 @@ var mapStateToProps = function(state) {
 };
 
 var mapDispatchToProps = function(dispatch) {
-  return {};
+  return {
+    fetchSongList: () => {
+      //
+    }
+  };
 };
 
 var connection = connect(mapStateToProps, mapDispatchToProps);

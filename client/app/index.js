@@ -12,7 +12,7 @@ ReactDOM.render(
   <Provider store={Store}>
     <Router history={hashHistory}>
       <Route path='/' component={App}>
-        <IndexRoute path='library' component={LibraryView}/>
+        <IndexRoute component={LibraryView}/>
         <Route path='game' component={GameView}/>
         <Route path='*' component={LibraryView} />
       </ Route>

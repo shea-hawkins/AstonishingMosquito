@@ -6,7 +6,7 @@ var actions = Object.assign({}, libraryActions);
 var state = {
   library: {
     fetching: false,
-    songs: [{id: 1, title: 'Song 1'}, {id: 2, title: 'Song 2'}, {id: 3, title: 'Song 3'}]
+    songs: [{id: 1, title: 'Song 1', filename: '123'}, {id: 2, title: 'Song 2', filename: 'meow'}, {id: 3, title: 'Song 3', filename: 'yo'}]
   }
 };
 

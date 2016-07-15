@@ -1,4 +1,5 @@
 import React from 'react';
+import { connection } from './LibraryModel';
 import LibraryItemView from '../stateless/LibraryItemView';
 
 class LibraryView extends React.Component {
@@ -6,7 +7,6 @@ class LibraryView extends React.Component {
     return (
       <div>
         {this.props.songs.map(function(song) {
-          console.log(song);
           return <LibraryItemView song={song} key={song.id} />;
         })}
       </div>
@@ -14,4 +14,4 @@ class LibraryView extends React.Component {
   }
 };
 
-export default LibraryView;
+export default connection(LibraryView);

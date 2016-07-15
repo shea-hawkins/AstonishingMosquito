@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router';
 
 export default () => {
   return (
@@ -7,8 +8,8 @@ export default () => {
         <span>Title</span>
       </div>
       <nav>
-        <a>Library</a>
-        <a>Game</a>
+        <div><Link to='/library'>Library</Link></div>
+        <div><Link to='/game'>Game</Link></div>
       </nav>
     </header>
   );

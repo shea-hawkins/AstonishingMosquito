@@ -8,6 +8,9 @@ class LibraryView extends React.Component {
     this.props = props;
     this.props.fetchSongList();
   }
+  handleClick(event) {
+    debugger;
+  }
   render() {
     return (
         <div className='collection container'>

@@ -1,10 +1,16 @@
 var express = require('express');
-// var fs = require('fs'); 
+var fs = require('fs'); 
+var path = require('path');
+
 var router = express.Router();
 
 router.get('/', function(req, res) {
-  res.send('hello library');
-  // res.end();
+  fs.readdir(path.join(__dirname + '/../../library'), 'utf8', function(err, files) {
+    if (err) {
+      throw err; 
+    }
+    res.send(files); 
+  });
 });
 
 module.exports = router;

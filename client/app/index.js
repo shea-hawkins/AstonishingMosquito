@@ -8,8 +8,6 @@ import App from './App.js';
 import GameView from './resources/gameView/GameView';
 import LibraryView from './resources/libraryView/LibraryView';
 
-
-// TODO add default router
 ReactDOM.render(
   <Provider store={Store}>
     <Router history={hashHistory}>

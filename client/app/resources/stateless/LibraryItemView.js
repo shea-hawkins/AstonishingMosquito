@@ -2,8 +2,8 @@ import React from 'react';
 
 export default (props) => {
   return (
-    <div>
+    <a className='collection-item' id={props.song.id}>
       <span>{props.song.title}</span>
-    </div>
+    </a>
   );
 };

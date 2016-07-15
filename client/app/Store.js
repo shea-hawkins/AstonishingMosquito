@@ -1,6 +1,7 @@
 import { createStore } from 'redux';
+import { actions as libraryActions } from './resources/libraryView/LibraryModel';
 
-var actions = Object.assign({});
+var actions = Object.assign({}, libraryActions);
 
 var state = {
   library: {
@@ -13,6 +14,7 @@ var reducer = function(prevState = state, action) {
   if (actions[action.type]) {
     return actions[action.type](prevState, action.data);
   } else {
+    console.warn(`Action ${action.type} doesn't exist.`);
     return prevState;
   }
 };

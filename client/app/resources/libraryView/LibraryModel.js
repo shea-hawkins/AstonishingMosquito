@@ -2,11 +2,24 @@ import { connect } from 'react-redux';
 
 var actions = {
   fetchingSongList: function(prevState, data) {
+    var library = prevState.library;
+    library.fetching = true;
     return Object.assign({}, prevState, {
-      library: {
-        fetching: true,
-        songs: prevState.library.nodes
-      }
+      library: library
+    });
+  },
+  receiveSongList: function(prevState, data) {
+    var library = prevState.library;
+    library.songs = data;
+    return Object.assign({}, prevState, {
+      library: library
+    });
+  },
+  fetchedSongList: function(prevState, data) {
+    var library = prevState.library;
+    library.fetching = false;
+    return Object.assign({}, prevState, {
+      library: library
     });
   }
 };
@@ -27,14 +40,16 @@ var mapDispatchToProps = function(dispatch) {
           return response.json();
         })
         .then((songs) => {
+          songs = songs.map((song, i) => {
+            // temporary object
+            return {title: song, id: i};
+          });
           dispatch({type: 'receiveSongList', data: songs});
           dispatch({type: 'fetchedSongList', data: null});
-          console.log(songs);
         });
     }
   };
 };
 
 var connection = connect(mapStateToProps, mapDispatchToProps);
-
-export { connection };
+export { connection, actions };

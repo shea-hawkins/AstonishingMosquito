@@ -2,8 +2,8 @@ import React from 'react';
 
 export default (props) => {
   return (
-    <div>
+    <li className='collection-item'>
       <span>{props.song.title}</span>
-    </div>
+    </li>
   );
 };

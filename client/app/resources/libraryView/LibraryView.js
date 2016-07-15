@@ -10,10 +10,12 @@ class LibraryView extends React.Component {
   }
   render() {
     return (
-      <div className='collection'>
-        {this.props.songs.map(function(song) {
-          return <LibraryItemView song={song} key={song.id} id={song.id} />;
-        })}
+      <div className='container'>
+        <div className='collection'>
+          {this.props.songs.map(function(song) {
+            return <LibraryItemView song={song} key={song.id} />;
+          })}
+        </div>
       </div>
     );
   }

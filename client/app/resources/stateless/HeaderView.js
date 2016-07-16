@@ -3,14 +3,15 @@ import { Link } from 'react-router';
 
 export default () => {
   return (
-    <header>
-      <div>
-        <span>Title</span>
-      </div>
-      <nav>
-        <div><Link to='/library'>Library</Link></div>
-        <div><Link to='/game'>Game</Link></div>
+      <div className='navbar-fixed'>
+        <nav>
+          <div className='nav-wrapper'>
+            <a href='#!' className='brand-logo'>Title</a>
+            <ul className='right hide-on-med-and-down'>
+              <li><Link to='/library'>Library</Link></li>
+            </ul>
+          </div>
       </nav>
-    </header>
+    </div>
   );
 };

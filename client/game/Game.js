@@ -1,6 +1,5 @@
 import PIXI from './lib/pixi.min.js';
 import { getStore } from './GameModel';
-import Wave from './resources/entities/Wave';
 
 class Game {
   constructor (id) {

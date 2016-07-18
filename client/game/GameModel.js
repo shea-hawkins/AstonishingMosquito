@@ -10,7 +10,6 @@ var state = {
 // this is so that the entity can be cleaned from every related game object
 var actions = {
   addEntity: function(prevState, entity) {
-    console.log(prevState);
     var entities = prevState.entities.slice();
     entities.push(entity);
     prevState.stage.addChild(entity.container);
@@ -26,7 +25,6 @@ var actions = {
 };
 
 var reducer = function(prevState = state, action) {
-  console.log(prevState, action.type);
   if (actions[action.type]) {
     return actions[action.type](prevState, action.data);
   } else {

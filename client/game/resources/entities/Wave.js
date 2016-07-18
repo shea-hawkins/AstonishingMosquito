@@ -16,7 +16,17 @@ export default class Wave extends Entity {
       this.graphics.position.y = opts.y || 200;
       this.container.addChild(this.graphics);
     }
+    inBounds() {
+      var renderer = this.store.getState().renderer;
+      var gameWidth = Math.pow((Math.pow(renderer.height, 2) + Math.pow(renderer.width, 2)), .5);
+      return gameWidth > this.radius;
+    }
     render() {
+      if (!this.inBounds()) {
+        // Calls the Entity destruction method, which handles all cleanup
+        this.destroy();
+        return;
+      }
       this.graphics.clear();
       this.graphics.lineStyle(this.thickness, this.color);
       this.graphics.drawCircle(this.graphics.position.x, this.graphics.position.y, this.radius);

@@ -6,6 +6,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "npm run start-server & npm run start-client",
+    "install": "npm run install-server & npm run install-client",
+    "install-win": "start npm run install-server && start npm run install-client",
+    "install-server": "cd server && npm run install",
+    "install-client": "cd client && npm run build",
     "start-server": "cd server && npm run start",
     "start-client": "cd client && npm run watch",
     "start-win": "start npm run start-server && start npm run start-client"

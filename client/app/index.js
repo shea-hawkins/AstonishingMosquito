@@ -13,7 +13,7 @@ ReactDOM.render(
     <Router history={hashHistory}>
       <Route path='/' component={App}>
         <IndexRoute component={LibraryView}/>
-        <Route path='game/:filename' component={GameView}/>
+        <Route path='game/:fileName' component={GameView}/>
         <Route path='*' component={LibraryView} />
       </ Route>
     </Router>

@@ -10,7 +10,10 @@ class GameView extends React.Component {
   }
   render() {
     return (
-      <div id="game">this game is l-l-loading.</div>
+      <div>
+        <span>{this.props.params.fileName}</span>
+        <div id="game" />
+      </div>
     );
   }
 }

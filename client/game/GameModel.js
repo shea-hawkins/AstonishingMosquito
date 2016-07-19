@@ -28,7 +28,7 @@ var actions = {
     });
   },
   removeEntity: function(prevState, target) {
-    var entities = prevState.entities.filter(entity => entity === target);
+    var entities = prevState.entities.filter(entity => entity !== target);
     prevState.stage.removeChild(target.container);
     return Object.assign({}, prevState, {
       entities: entities

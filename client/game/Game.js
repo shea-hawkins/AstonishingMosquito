@@ -1,11 +1,10 @@
-import PIXI from './lib/pixi.min.js';
 import { getStore } from './GameModel';
 import Beatbox from './resources/entities/Beatbox';
 import Player from './resources/entities/Player';
 
 class Game {
   constructor (id) {
-    this.renderer = new PIXI.autoDetectRenderer(this.width, this.height);
+    this.renderer = new PIXI.autoDetectRenderer(800, 600);
     document.getElementById(id).appendChild(this.renderer.view);
 
     this.stage = new PIXI.Container();

@@ -16,7 +16,13 @@ export default class Player extends Entity {
       this.sprite.position.y = 400;
 
       this.container.addChild(this.sprite);
-      setTimeout(this.changeState.bind(this, 'JUMPING'), 1000);
+
+      window.addEventListener("keydown", function(event) {
+        if (this.state.stateName === 'STANDING') {
+          this.changeState('JUMPING');
+          setTimeout(this.changeState.bind(this, 'STANDING'), 2000);
+        }
+      }.bind(this));
     }
 
     changeState(stateName) {
@@ -24,7 +30,7 @@ export default class Player extends Entity {
 
       var oldSprite = this.sprite; 
 
-      this.sprite = new PIXI.Sprite.fromImage(this.state.baseImg + stateName + '.png');
+      this.sprite = new PIXI.Sprite.fromImage(this.state.baseImg + this.state.stateName + '.png');
 
       this.sprite.position.x = oldSprite.position.x;
       this.sprite.position.y = oldSprite.position.y; 
@@ -36,6 +42,16 @@ export default class Player extends Entity {
 
       this.container.addChild(this.sprite);
     }
+
+    // jump(event) {
+    //   console.log(event.keycode);
+    //   if (this.state.stateName === 'STANDING') {
+    //     this.changeState.bind(this, 'JUMPING')
+    //   } else {
+    //     this.changeState.bind(this, 'STANDING')
+    //   }
+      
+    // }
 
     render() {
 

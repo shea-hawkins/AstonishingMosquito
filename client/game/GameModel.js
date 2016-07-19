@@ -21,6 +21,18 @@ var actions = {
     return Object.assign({}, prevState, {
       stage: stage
     });
+  },
+  addRenderer: function(prevState, renderer) {
+    return Object.assign({}, prevState, {
+      renderer: renderer
+    });
+  },
+  removeEntity: function(prevState, target) {
+    var entities = prevState.entities.filter(entity => entity !== target);
+    prevState.stage.removeChild(target.container);
+    return Object.assign({}, prevState, {
+      entities: entities
+    });
   }
 };
 

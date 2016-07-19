@@ -20,6 +20,15 @@ export default class Player extends Entity {
       window.addEventListener("keydown", function(event) {
         if (this.state.stateName === 'STANDING') {
           this.changeState('JUMPING');
+
+          console.log('container', this.container);
+          console.log('store stage', this.store.getState().stage);
+          this.store.getState().stage.removeChild(this.container);
+          this.store.getState().stage.addChild(this.container);
+          // this.container.removeChild(this.sprite);
+          // this.container.addChild(this.sprite);
+          // remove jumping sprite from stage 
+          // add it back to stage 
           setTimeout(this.changeState.bind(this, 'STANDING'), 500);
         }
       }.bind(this));
@@ -57,3 +66,4 @@ export default class Player extends Entity {
 
     }
 }
+

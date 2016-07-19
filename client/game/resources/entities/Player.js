@@ -20,7 +20,7 @@ export default class Player extends Entity {
       window.addEventListener("keydown", function(event) {
         if (this.state.stateName === 'STANDING') {
           this.changeState('JUMPING');
-          setTimeout(this.changeState.bind(this, 'STANDING'), 2000);
+          setTimeout(this.changeState.bind(this, 'STANDING'), 500);
         }
       }.bind(this));
     }

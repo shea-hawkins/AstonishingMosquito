@@ -12,11 +12,13 @@ class LibraryView extends React.Component {
   render() {
     return (
       <div className='collection container'>
+        <h2>Upload a Song</h2>
         <SongUploadView onSubmit={this.props.onSubmit} />
+        <h2>Or Select a Favorite</h2>
         <ul>
           {this.props.songs.map((song) => {
             return <LibraryItemView song={song} key={song.id} />;
-          })}    
+          })}
         </ul>
       </div>
     );

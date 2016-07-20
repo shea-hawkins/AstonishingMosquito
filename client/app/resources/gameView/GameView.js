@@ -12,13 +12,13 @@ class GameView extends React.Component {
     return (
       <div>
         <header>
-          <div id='current-score'>
+          <div id='score-box'>
             <span>current score:</span>
-            <div>394</div>
+            <div id='current-score'>394</div>
           </div>
-          <div id='remaining-time'>
+          <div id='time-box'>
             <span>remaining time:</span>
-            <div>1:42</div>
+            <div id='remaining-time'>1:42</div>
             <span>min second</span>
           </div>
         </header>

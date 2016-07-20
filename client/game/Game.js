@@ -7,24 +7,23 @@ import AudioController from './resources/controllers/AudioController';
 
 class Game {
   constructor (id) {
-    this.renderer = new PIXI.autoDetectRenderer(800, 600);
     this.node = document.getElementById(id);
-    this.node.appendChild(this.renderer.view);
+    var renderer = new PIXI.autoDetectRenderer(800, 600);
+    this.node.appendChild(renderer.view);
 
-    this.collisionDetector = new CollisionDetector(this.store);
-    this.audioController = new AudioController(this.store, {node: this.node});
-    this.stage = new PIXI.Container();
+    var collisionDetector = new CollisionDetector(this.store);
+    var audioController = new AudioController(this.store, {node: this.node});
+    var stage = new PIXI.Container();
 
 
     this.store = getStore();
-    // refactor these lines of code to add <prop>, data item including the
-    // name of the prop.
-    this.store.dispatch({type: 'addGameItem', data: {key: 'audioController', val: this.audioController}});
-    this.store.dispatch({type: 'addGameItem', data: {key: 'stage', val: this.stage}});
-    this.store.dispatch({type: 'addGameItem', data: {key: 'renderer', val: this.renderer}});
+    this.store.dispatch({type: 'addGameItem', data: {key: 'collisionDetector', val: collisionDetector}});
+    this.store.dispatch({type: 'addGameItem', data: {key: 'audioController', val: audioController}});
+    this.store.dispatch({type: 'addGameItem', data: {key: 'stage', val: stage}});
+    this.store.dispatch({type: 'addGameItem', data: {key: 'renderer', val: renderer}});
 
     var beatbox = new Beatbox(this.store);
-    //var player = new Player(this.store);
+    var player = new Player(this.store);
     this.render();
   }
 
@@ -37,11 +36,11 @@ class Game {
         // Collisions are detected before the next render, just in case the
         // collision impacts the render or the render results in destruction of the
         // object
-        this.collisionDetector.detectCollisions(entity);
+        state.collisionDetector.detectCollisions(entity);
         entity.render();
       }
     });
-    this.renderer.render(state.stage);
+    state.renderer.render(state.stage);
     requestAnimationFrame(this.render.bind(this));
   }
 }

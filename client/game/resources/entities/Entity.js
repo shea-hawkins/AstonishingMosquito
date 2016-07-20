@@ -17,6 +17,8 @@ export default class Entity {
       this.store.dispatch({type: 'removeEntity', data: this});
       this.container.destroy(true);
     }
+    // can be overridden
+    collide(otherEntity) {}
     render() {
       console.error('The render method of each entity must be overridden.');
     }

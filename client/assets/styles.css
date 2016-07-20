@@ -19,7 +19,7 @@ a {
 }
 
 header {
-  height: 125px;
+  height: 50px;
 }
 
 footer {
@@ -35,9 +35,8 @@ footer {
   float: right;
 }
 
-#game-window {
-  width: 640px;
-  height: 480px;
+#game {
+  width: 800px;
   margin: auto;
   border: 1px solid white;
   background-color: #191919;

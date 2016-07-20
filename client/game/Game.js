@@ -14,6 +14,7 @@ class Game {
     this.stage = new PIXI.Container();
 
     this.store = getStore();
+    this.store.dispatch({type: 'addAudioController', data: this.audioController});
     this.store.dispatch({type: 'addStage', data: this.stage});
     this.store.dispatch({type: 'addRenderer', data: this.renderer});
 

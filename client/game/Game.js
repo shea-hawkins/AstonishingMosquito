@@ -6,16 +6,16 @@ import CollisionDetector from './resources/controllers/CollisionDetector';
 import AudioController from './resources/controllers/AudioController';
 
 class Game {
-  constructor (id) {
+  constructor (id, song) {
     this.node = document.getElementById(id);
     var renderer = new PIXI.autoDetectRenderer(800, 600);
     this.node.appendChild(renderer.view);
 
     var collisionDetector = new CollisionDetector(this.store);
-    var audioController = new AudioController(this.store, {node: this.node});
+    var audioController = new AudioController(this.store, {node: this.node, fileName: song});
     var stage = new PIXI.Container();
 
-    
+
     this.store = getStore();
     this.store.dispatch({type: 'addGameItem', data: {key: 'collisionDetector', val: collisionDetector}});
     this.store.dispatch({type: 'addGameItem', data: {key: 'audioController', val: audioController}});

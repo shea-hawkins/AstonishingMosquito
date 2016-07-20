@@ -6,7 +6,7 @@ export default class AudioController extends Controller {
     super(store);
     this.node = document.createElement('AUDIO');
     opts.node.appendChild(this.node);
-    this.node.src = 'songLibrary/0b264058603c56dda341f309afac7865';
+    this.node.src = 'songLibrary/' + opts.fileName;
 
 
 
@@ -25,7 +25,7 @@ export default class AudioController extends Controller {
         var inputData = chunk.inputBuffer.getChannelData(channel);
         for (var sample = 0; sample < chunk.inputBuffer.length; sample++) {
           // mutable structure modifies the output buffer as well
-          if (inputData[sample] > .6 && !peakEmitted) {
+          if (inputData[sample] > .4 && !peakEmitted) {
             subject.next(inputData[sample]);
             peakEmitted = true;
           }

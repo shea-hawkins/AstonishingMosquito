@@ -44,10 +44,13 @@ export default class Player extends Entity {
     }
 
     collide(otherEntity) {
-      if (this.lives <= 0) {
-        this.store.dispatch({type: 'endGame', data: null});
+      var gameState = this.store.getState();
+      if (this.state.stateName === 'JUMPING') {
+        return;
+      } else if (gameState.lives <= 0) {
+        this.store.dispatch({type: 'gameOver', data: null});
       } else {
-        this.lives--;
+        this.store.dispatch({type: 'decrementLife', data: null});
       }
     }
 

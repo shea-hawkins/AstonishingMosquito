@@ -2,7 +2,8 @@ import { createStore } from 'redux';
 
 var state = {
   entities: [],
-  stage: {}
+  stage: {},
+  lives: 5
 };
 
 
@@ -15,6 +16,17 @@ var actions = {
     prevState.stage.addChild(entity.container);
     return Object.assign({}, prevState, {
       entities: entities
+    });
+  },
+  decrementLife: function(prevState) {
+    var lives = prevState.lives - 1;
+    return Object.assign({}, prevState, {
+      lives: lives
+    });
+  },
+  gameOver: function(prevState) {
+    return Object.assign({}, prevState, {
+      stateName: 'gameOver'
     });
   },
   addGameItem: function(prevState, item) {

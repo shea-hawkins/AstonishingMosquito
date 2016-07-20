@@ -13,9 +13,11 @@ class LibraryView extends React.Component {
     return (
       <div className='collection container'>
         <SongUploadView onSubmit={this.props.onSubmit} />
-        {this.props.songs.map((song) => {
-          return <LibraryItemView song={song} key={song.id} />;
-        })}
+        <ul>
+          {this.props.songs.map((song) => {
+            return <LibraryItemView song={song} key={song.id} />;
+          })}    
+        </ul>
       </div>
     );
   }

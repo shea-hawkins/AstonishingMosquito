@@ -15,7 +15,6 @@ export default class AudioController extends Controller {
 
     // Begin GenerateSubject
     var subject = new RX.Subject();
-    subject.subscribe(next => console.log(next));
     var filter = context.createBiquadFilter();
     filter.type = 'lowpass';
     var peakFinder = context.createScriptProcessor(16384, 1, 1);

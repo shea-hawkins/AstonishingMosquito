@@ -8,6 +8,10 @@ html, body {
   background-color: black;
 }
 
+a {
+  color: white;
+}
+
 .container {
   background: url('transparent-rainbow.png') center / cover;
   width: 100%;
@@ -81,15 +85,16 @@ li {
   opacity: 0.5;
 }
 
-button {
-  margin-top: 25px;
+input {
+  margin: auto;
   padding-top: 10px;
   padding-bottom: 10px;
   border: 1px solid white;
   background-color: #191919;
-  font-size: 1em;
+  font-size: .8em;
   color: white;
-  opacity: 0.5
+  opacity: 0.5;
+  display: block;
 }
 
 li:hover, button:hover {

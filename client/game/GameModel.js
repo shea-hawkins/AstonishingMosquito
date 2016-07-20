@@ -17,26 +17,16 @@ var actions = {
       entities: entities
     });
   },
-  addStage: function(prevState, stage) {
-    return Object.assign({}, prevState, {
-      stage: stage
-    });
-  },
-  addRenderer: function(prevState, renderer) {
-    return Object.assign({}, prevState, {
-      renderer: renderer
-    });
+  addGameItem: function(prevState, item) {
+    var newItem = {};
+    newItem[item.key] = item.val;
+    return Object.assign({}, prevState, newItem);
   },
   removeEntity: function(prevState, target) {
     var entities = prevState.entities.filter(entity => entity !== target);
     prevState.stage.removeChild(target.container);
     return Object.assign({}, prevState, {
       entities: entities
-    });
-  },
-  addAudioController: function(prevState, target) {
-    return Object.assign({}, prevState, {
-      audioController: target
     });
   }
 };

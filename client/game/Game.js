@@ -19,12 +19,12 @@ class Game {
     this.store = getStore();
     // refactor these lines of code to add <prop>, data item including the
     // name of the prop.
-    this.store.dispatch({type: 'addAudioController', data: this.audioController});
-    this.store.dispatch({type: 'addStage', data: this.stage});
-    this.store.dispatch({type: 'addRenderer', data: this.renderer});
+    this.store.dispatch({type: 'addGameItem', data: {key: 'audioController', val: this.audioController}});
+    this.store.dispatch({type: 'addGameItem', data: {key: 'stage', val: this.stage}});
+    this.store.dispatch({type: 'addGameItem', data: {key: 'renderer', val: this.renderer}});
 
     var beatbox = new Beatbox(this.store);
-    var player = new Player(this.store);
+    //var player = new Player(this.store);
     this.render();
   }
 

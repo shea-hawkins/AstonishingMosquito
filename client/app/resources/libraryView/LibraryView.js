@@ -11,7 +11,7 @@ class LibraryView extends React.Component {
   }
   render() {
     return (
-      <div className='collection container'>
+      <div id='library-list'>
         <h2>Upload a Song</h2>
         <SongUploadView onSubmit={this.props.onSubmit} />
         <h2>Or Select a Favorite</h2>

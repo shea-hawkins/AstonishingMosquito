@@ -11,8 +11,24 @@ class GameView extends React.Component {
   render() {
     return (
       <div>
-        <span>{this.props.params.fileName}</span>
+        <header>
+          <div id='score-box'>
+            <span>current score:</span>
+            <div id='current-score'>394</div>
+          </div>
+          <div id='time-box'>
+            <span>remaining time:</span>
+            <div id='remaining-time'>1:42</div>
+            <span>min second</span>
+          </div>
+        </header>
         <div id="game" />
+        <footer>
+          <h1>Now Playing: <span>{this.props.params.fileName}</span></h1>
+          <div id='next-up'>
+            Next Up:
+          </div>
+        </footer>
       </div>
     );
   }

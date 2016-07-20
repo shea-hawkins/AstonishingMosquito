@@ -7,7 +7,7 @@ import GameView from './resources/gameView/GameView';
 class App extends React.Component {
   render() {
     return (
-      <div>
+      <div className='container'>
         <HeaderView />
           {this.props.children}
       </div>

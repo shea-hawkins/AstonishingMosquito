@@ -1,6 +1,8 @@
 import { getStore } from './GameModel';
 import Beatbox from './resources/entities/Beatbox';
 import Player from './resources/entities/Player';
+import Wave from './resources/entities/Wave';
+import CollisionDetector from './resources/controllers/CollisionDetector';
 import AudioController from './resources/controllers/AudioController';
 
 class Game {
@@ -9,18 +11,20 @@ class Game {
     this.node = document.getElementById(id);
     this.node.appendChild(this.renderer.view);
 
+    this.collisionDetector = new CollisionDetector(this.store);
     this.audioController = new AudioController(this.store, {node: this.node});
-
     this.stage = new PIXI.Container();
 
+
     this.store = getStore();
+    // refactor these lines of code to add <prop>, data item including the
+    // name of the prop.
     this.store.dispatch({type: 'addAudioController', data: this.audioController});
     this.store.dispatch({type: 'addStage', data: this.stage});
     this.store.dispatch({type: 'addRenderer', data: this.renderer});
 
     var beatbox = new Beatbox(this.store);
     var player = new Player(this.store);
-
     this.render();
   }
 
@@ -30,6 +34,10 @@ class Game {
       // If the entity has left the screen or if it is currently
       // awaiting grabage colleciton, renderable will be set to false.
       if (entity.renderable) {
+        // Collisions are detected before the next render, just in case the
+        // collision impacts the render or the render results in destruction of the
+        // object
+        this.collisionDetector.detectCollisions(entity);
         entity.render();
       }
     });

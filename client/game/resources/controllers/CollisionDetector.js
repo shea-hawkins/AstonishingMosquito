@@ -5,10 +5,14 @@ import Wave from '../entities/Wave';
 export default class CollisionDetector extends Controller {
   constructor(store) {
     super(store);
-
+    this.registeredEntities = [];
   }
-  detectCollisions() {
-
+  detectCollisions(otherEntity) {
+    this.registeredEntities.forEach(entity => {
+      if (entity !== otherEntity && this.isColliding(entity, otherEntity)) {
+        this.observables[entity.id].next(otherEntity);
+      }
+    });
   }
   isColliding(entity, otherEntity) {
     var dist = function(p1, p2) {
@@ -24,7 +28,7 @@ export default class CollisionDetector extends Controller {
       // in order to keep track of the bounding box, find the distance of the spirite's
       // closes corner from the center and the distance of the sprite's furthest corner.
 
-      // Sprite's closes corner is the one in which the absolute distance calculation is
+      // Sprite's closest corner is the one in which the distance calculation is
       // smallest.
       var spriteGlobals = entity.sprite.toGlobal(new PIXI.Point(0, 0));
       var width = entity.sprite.width;
@@ -64,7 +68,14 @@ export default class CollisionDetector extends Controller {
       return radius >= boundingCorners[0] && radius <= boundingCorners[1];
     }
   }
-  registerEntity(entity, targetClass) {
-
+  registerEntitySubject(entity) {
+    this.observables[entity.id] = new RX.Subject();
+    this.registeredEntities.push(entity);
+    return this.observables[entity.id];
+  }
+  unregisterEntitySubject(entity) {
+    this.observables[entity.id].dispose();
+    delete this.observables[entity.id];
+    this.registeredEntities = this.registeredEntities.filter(regEntity => regEntity !== entity);
   }
 }

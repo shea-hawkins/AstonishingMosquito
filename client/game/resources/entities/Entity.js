@@ -5,6 +5,9 @@ export default class Entity {
     // and the things added to the container
     constructor(store) {
       this.store = store;
+      // Can be changed to a more reliable unique ID, but we never expect more than ~15
+      // objects on the screen at a time right now.
+      this.id = Math.floor(Math.random() * 10000);
       this.container = new PIXI.Container();
       this.renderable = true;
       store.dispatch({type: 'addEntity', data: this});

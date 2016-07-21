@@ -1,5 +1,7 @@
 import React from 'react';
 import Game from '../../../game/Game.js';
+import ScoreView from '../stateless/ScoreView.js';
+import SongQueueView from '../stateless/SongQueueView.js';
 
 class GameView extends React.Component {
   componentDidMount() {
@@ -11,24 +13,9 @@ class GameView extends React.Component {
   render() {
     return (
       <div>
-        <header>
-          <div id='score-box'>
-            <span>current score:</span>
-            <div id='current-score'>394</div>
-          </div>
-          <div id='time-box'>
-            <span>remaining time:</span>
-            <div id='remaining-time'>1:42</div>
-            <span>min second</span>
-          </div>
-        </header>
+        <ScoreView />
         <div id="game" />
-        <footer>
-          <h1>Now Playing: <span>{this.props.params.fileName}</span></h1>
-          <div id='next-up'>
-            Next Up:
-          </div>
-        </footer>
+        <SongQueueView />
       </div>
     );
   }

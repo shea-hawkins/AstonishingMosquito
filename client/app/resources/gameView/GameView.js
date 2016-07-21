@@ -1,5 +1,6 @@
 import React from 'react';
 import Game from '../../../game/Game.js';
+import GameRendererView from './GameRendererView.js';
 import ScoreView from '../stateless/ScoreView.js';
 import SongQueueView from '../stateless/SongQueueView.js';
 
@@ -14,7 +15,7 @@ class GameView extends React.Component {
     return (
       <div>
         <ScoreView />
-        <div id="game" />
+        <GameRendererView />
         <SongQueueView />
       </div>
     );

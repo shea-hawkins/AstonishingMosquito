@@ -12,9 +12,9 @@ class GameView extends React.Component {
     // current song.
     var game = new Game('game', this.props.params.fileName);
     var state = game.store.getState(); // expect this to be the state object
-    console.log(state);
+    this.props.updateGameState();
     console.log(this.props);
-    this.props.updateTime();
+    console.log('NOW GAME STATE IS', state);
     // game.addEventListener('updateTime', function(newState, data) {
     //   console.log('data', data); // expect this to be a new time object
     // });

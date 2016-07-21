@@ -2,12 +2,20 @@ import { connect } from 'react-redux';
 
 var actions = {
   updatingTime: function(prevState, data) {
-    console.log('updating time!', data);
-    var time = prevState.time;
-    time.elapsed = data.elapsed;
-    time.duration = data.duration;
+    console.log('this is the previous state!', prevState);
+    var game = prevState.game;
+    game.elapsed = data.elapsed;
+    game.duration = data.duration;
     return Object.assign({}, prevState, {
-      game: time
+      game: game
+    });
+  },
+  gameOver: function(prevState) {
+    console.log('this is the previous states stateName value', prevState.game.stateName);
+    var game = prevState.game;
+    game.stateName = "GAMEOVER";
+    return Object.assign({}, prevState, {
+      game: game
     });
   }
 };
@@ -29,6 +37,10 @@ var mapDispatchToProps = function(dispatch) {
           duation: 25
         }
       });
+    },
+    updateGameState: () => {
+      console.log('update game state');
+      dispatch({type: 'gameOver'});
     }
   }
 };

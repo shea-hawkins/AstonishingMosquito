@@ -14,7 +14,7 @@ class GameView extends React.Component {
   render() {
     return (
       <div>
-        <ScoreView />
+        <ScoreView score={394} time={"1:24"}/>
         <GameRendererView />
         <SongQueueView fileName={this.props.params.fileName}/>
       </div>

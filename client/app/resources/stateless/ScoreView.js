@@ -5,11 +5,11 @@ export default (props) => {
     <header>
     <div id='score-box'>
       <span>current score:</span>
-      <div id='current-score'>394</div>
+      <div id='current-score'>{props.score}</div>
     </div>
     <div id='time-box'>
       <span>remaining time:</span>
-      <div id='remaining-time'>1:42</div>
+      <div id='remaining-time'>{props.time}</div>
       <span>min second</span>
     </div>
     </header>

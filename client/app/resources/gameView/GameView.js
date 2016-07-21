@@ -16,7 +16,7 @@ class GameView extends React.Component {
       <div>
         <ScoreView />
         <GameRendererView />
-        <SongQueueView />
+        <SongQueueView fileName={this.props.params.fileName}/>
       </div>
     );
   }

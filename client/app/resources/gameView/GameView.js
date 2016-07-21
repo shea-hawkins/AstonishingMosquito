@@ -11,13 +11,10 @@ class GameView extends React.Component {
     // and bind that game instance to the dom and pass the
     // current song.
     var game = new Game('game', this.props.params.fileName);
-    var state = game.store.getState(); // expect this to be the state object
-    setTimeout(() => {
-      this.props.updateGameState();
-    }, 5000);
-    // game.addEventListener('updateTime', function(newState, data) {
-    //   console.log('data', data); // expect this to be a new time object
-    // });
+    // var state = game.store.getState(); // expect this to be the state object
+    game.addEventListener('updateTime', function(newState, data) {
+      console.log('data', data); // expect this to be a new time object
+    });
     // game.addEventListener('decrementLives', function(newState) {
     //   console.log(newState.lives); // expect this to be a number
     // });

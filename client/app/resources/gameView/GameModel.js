@@ -9,6 +9,13 @@ var actions = {
       game: game
     });
   },
+  updatingLives: function(prevState, data) {
+    var game = prevState.game;
+    game.lives = data;
+    return Object.assign({}, prevState, {
+      game: game
+    });
+  },
   gameOver: function(prevState, data) {
     var game = prevState.game;
     game.stateName = 'GAMEOVER';
@@ -31,6 +38,9 @@ var mapDispatchToProps = function(dispatch) {
     updateTime: (time) => {
       dispatch({type: 'updatingTime', data: time });
     },
+    updateLives: (lives) => {
+      dispatch({type: 'updatingLives', data: lives });
+    }
     updateGameState: () => {
       dispatch({type: 'gameOver'});
     }

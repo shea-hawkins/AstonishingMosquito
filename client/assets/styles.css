@@ -89,6 +89,7 @@ a {
   float: left;
   text-align: center;
   width: 20%;
+  margin-top: 20px;
 }
 
 #current-score, #remaining-time {
@@ -99,6 +100,7 @@ a {
   float: right;
   text-align: center;
   width: 20%;
+  margin-top: 20px;
 }
 
 #game {
@@ -129,4 +131,8 @@ a {
   width: 75%;
   margin: auto;
   overflow: hidden;
+}
+
+.min {
+  padding-right: 20px;
 }

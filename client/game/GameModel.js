@@ -3,7 +3,8 @@ import { createStore } from 'redux';
 var state = {
   entities: [],
   stage: {},
-  lives: 5
+  lives: 5,
+  time: {elapsed: 0, duration: 0}
 };
 
 var storeListeners = {
@@ -22,6 +23,11 @@ var actions = {
     prevState.stage.addChild(entity.container);
     return Object.assign({}, prevState, {
       entities: entities
+    });
+  },
+  updateTime: function(prevState, time) {
+    return Object.assign({}, prevState, {
+      time: time
     });
   },
   decrementLife: function(prevState) {

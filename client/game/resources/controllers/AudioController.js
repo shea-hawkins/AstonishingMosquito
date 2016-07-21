@@ -6,16 +6,21 @@ export default class AudioController extends Controller {
     super(store);
     this.node = document.createElement('AUDIO');
     opts.node.appendChild(this.node);
+
+    // At the moment, only the first observable is the one generated
+    this.observables[0] = new RX.Subject();
+
     this.node.src = 'songLibrary/' + opts.fileName;
+
     this.context = new AudioContext();
     this.source = this.context.createMediaElementSource(this.node);
-    this.generateSubjectAtThreshold(.5);
     this.source.connect(this.context.destination);
-    this.node.play();
-    this.getIdealThreshold(opts.fileName);
+    this.getIdealThreshold(opts.fileName).then(threshold => {
+      this.subscribeSubjectAtThreshold(this.observables[0], threshold);
+      this.node.play();
+    });
   }
-  generateSubjectAtThreshold(threshold) {
-    var subject = new RX.Subject();
+  subscribeSubjectAtThreshold(subject, threshold) {
     var filter = this.context.createBiquadFilter();
     filter.type = 'lowpass';
     var peakFinder = this.context.createScriptProcessor(16384, 1, 1);
@@ -34,7 +39,6 @@ export default class AudioController extends Controller {
       }
       peakEmitted = false;
     };
-    this.observables[[.6, 'lowpass']] = subject;
     this.source.connect(filter);
     filter.connect(peakFinder);
     peakFinder.connect(this.context.destination);
@@ -84,7 +88,6 @@ export default class AudioController extends Controller {
             minPeaks = 1.25 * audioBuffer.duration; // This minpeaks value determines what the
                           // ultimate threshold is chosen to be.
                           // the next change can be a 'maxPeaks'
-        console.log(maxPeaks, minPeaks);
 
         // Next goal: actually hook this up to a filter
         do {
@@ -94,9 +97,7 @@ export default class AudioController extends Controller {
           } else if (peaks.length < minPeaks) {
             threshold = threshold - threshold / 2;
           }
-          console.log(threshold);
         } while (!(peaks.length > minPeaks && peaks.length < maxPeaks));
-        console.log(peaks.length);
         return threshold;
       });
   }

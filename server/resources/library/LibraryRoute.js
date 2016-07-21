@@ -52,34 +52,27 @@ router.post('/', function (req, res) {
       console.log('multer error', err);
       return;
     }
-    md5File(req.file.path)
-    .then(function(hash) {
-      console.log('md5file hash is', hash);
-      console.log('body is', req.file.filename);
-      client.hmset(hash, {'filename': req.file.filename}); // leave as filename for now and replace out with contents needed for audiocontroller
-    }).then(function() {
-      res.sendStatus(201);
-    })
 
+    new Promise(function(resolve, reject) {
+      mm(fs.createReadStream(path.join(__dirname + '/../../library/' + req.file.filename)), function (err, metadata) {
+        // Coverart is not currently processed,
+        // so it is removed from the response.
+        delete metadata.picture;
+        metadata.fileName = req.file.filename;
+        resolve(metadata);
+      });
+    })
+    .then(function(metadata) {
+      md5File(req.file.path)
+      .then(function(hash) {
+        client.hmset(hash, 'metadata', JSON.stringify(metadata)); // leave as filename for now and replace out with contents needed for audiocontroller
+      }).then(function() {
+        res.sendStatus(201);
+      })
+    });
     // Everything went fine 
   });
 });
-
-// router.post('/', upload.any(), function(req, res) {
-//   console.log('received post request');
-//   console.log('path to file', req.file.path);
-//   md5file(req.file.path)
-//   .then(function(hash) {
-//     console.log('md5file hash is', hash);
-//     console.log('body is', req.file.filename);
-//     client.hmset(hash, req.file.filename); // leave as filename for now and replace out with contents needed for audiocontroller
-//   })
-//   .then(function() { 
-//     res.sendStatus(201); 
-//   });
-
-//   // res.send({filename: req.file.filename});
-// });
 
 
 

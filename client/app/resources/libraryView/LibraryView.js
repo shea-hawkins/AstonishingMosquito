@@ -19,8 +19,8 @@ class LibraryView extends React.Component {
         <div id="library-list">
           <h2>Or Select a Favorite</h2>
           <ul>
-            {this.props.songs.map((song) => {
-              return <LibraryItemView song={song} key={song.id} />;
+            {this.props.songs.map((song, index) => {
+              return <LibraryItemView song={song} key={song.id} index={index} />;
             })}
           </ul>
         </div>

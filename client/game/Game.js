@@ -12,7 +12,7 @@ class Game {
     this.node.appendChild(renderer.view);
 
     var collisionDetector = new CollisionDetector(this.store);
-    var audioController = new AudioController(this.store, {node: this.node, fileName: song});
+    var audioController = new AudioController(this.store, {node: this.node, fileName: 'd616a066d86c19941cef0d59db569bd8'});
     var stage = new PIXI.Container();
 
 

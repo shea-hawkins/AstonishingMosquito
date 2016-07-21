@@ -2,6 +2,7 @@ var express = require('express');
 var fs = require('fs');
 var path = require('path');
 var mm = require('musicmetadata');
+var md5File = require('md5-file/promise');
 
 var multer = require('multer');
 var upload = multer( {
@@ -44,7 +45,14 @@ router.get('/', function(req, res) {
 });
 
 router.post('/', upload.single('song'), function(req, res) {
-  res.send({filename: req.file.filename});
+  // md5file(req.file.filename).then(function (hash) {
+  //   console.log('hash', hash);
+  //   client.hmset(hash, req.file.filename);
+  // });
+  // res.sendStatus(201);
+  // res.send({filename: req.file.filename});
 });
+
+
 
 module.exports = router;

@@ -17,7 +17,6 @@
     "morgan": "^1.7.0",
     "nodemon": "^1.9.2",
     "redis": "^2.6.2",
-    "redis-server": "0.0.3"
   },
   "dependencies": {
     "multer": "^1.1.0",

@@ -6,6 +6,12 @@ var state = {
   lives: 5
 };
 
+var storeListeners = {
+  'eventName': [(newState, action) => {
+    // Callback is called with the newState and the action
+  }]
+}
+
 
 // All stage additions and removals must appear here.
 // this is so that the entity can be cleaned from every related game object
@@ -45,7 +51,12 @@ var actions = {
 
 var reducer = function(prevState = state, action) {
   if (actions[action.type]) {
-    return actions[action.type](prevState, action.data);
+    var newState = actions[action.type](prevState, action.data);
+    if (storeListeners[action.type]) {
+      // Allows listeners to be added to the store for any action.
+      storeListeners[action.type].forEach(listener => listener(newState, action));
+    }
+    return newState;
   } else {
     console.warn('Game action ' + action.type + ' doesn\'t exist');
     return prevState;
@@ -56,4 +67,12 @@ var getStore = function() {
   return createStore(reducer);
 };
 
-export { getStore };
+var addStoreListener = function(event, fun) {
+  if (storeListeners[event]) {
+    storeListeners[event].push(fun);
+  } else {
+    storeListeners[event] = [fun];
+  }
+}
+
+export { getStore, addStoreListener };

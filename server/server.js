@@ -1,6 +1,9 @@
 var express = require('express');
 var morgan = require('morgan');
 var path = require('path');
+var RedisServer = require('redis-server');
+var redisServerInstance = new RedisServer(6379);
+var redis = require('redis');
 var libraryRoute = require('./resources/library/LibraryRoute');
 
 var app = express();
@@ -20,4 +23,16 @@ app.get('/', function(req, res) {
 
 app.listen(port, function() {
   console.log('Magic happening on port', port);
+});
+
+redisServerInstance.open(function (error) {
+   if (error) {
+    throw new Error(error);
+  } 
+});
+
+var client = redis.createClient();
+
+client.on('connect', function() {
+    console.log('Redis client connected at port 6379');
 });

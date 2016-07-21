@@ -6,10 +6,9 @@ export default class Wave extends Entity {
 
       opts = opts || {};
       // Takes the input value or sets a default/random value
-    
+
       this.color = opts.color || Math.floor(0x1000000 * Math.random());
       // this.color = opts.color || this.rainbow(Math.floor(Math.random() * (255 - 0 + 1)) + 0);
-      console.log(this.color);
       this.thickness = opts.thickness || Math.random() * 10 + 3;
       this.radius = opts.radius || 10;
       this.speed = opts.speed || .025;

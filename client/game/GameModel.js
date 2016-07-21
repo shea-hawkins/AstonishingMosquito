@@ -2,7 +2,8 @@ import { createStore } from 'redux';
 
 var state = {
   entities: [],
-  stage: {}
+  stage: {},
+  lives: 5
 };
 
 
@@ -17,26 +18,27 @@ var actions = {
       entities: entities
     });
   },
-  addStage: function(prevState, stage) {
+  decrementLife: function(prevState) {
+    var lives = prevState.lives - 1;
     return Object.assign({}, prevState, {
-      stage: stage
+      lives: lives
     });
   },
-  addRenderer: function(prevState, renderer) {
+  gameOver: function(prevState) {
     return Object.assign({}, prevState, {
-      renderer: renderer
+      stateName: 'gameOver'
     });
+  },
+  addGameItem: function(prevState, item) {
+    var newItem = {};
+    newItem[item.key] = item.val;
+    return Object.assign({}, prevState, newItem);
   },
   removeEntity: function(prevState, target) {
     var entities = prevState.entities.filter(entity => entity !== target);
     prevState.stage.removeChild(target.container);
     return Object.assign({}, prevState, {
       entities: entities
-    });
-  },
-  addAudioController: function(prevState, target) {
-    return Object.assign({}, prevState, {
-      audioController: target
     });
   }
 };

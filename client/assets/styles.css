@@ -58,9 +58,31 @@ a {
 }
 
 .container {
-  background: url('transparent-rainbow.png') center / cover;
-  width: 100%;
-  min-height: 100%;
+  overflow-y: hidden;
+}
+
+.library-view {
+  background-image: url(img/transparent-rainbow-1.png);
+  background-size: 100%;
+  background-repeat: no-repeat;
+  height: 100%;
+}
+
+.game-view {
+  background-image: url(img/transparent-rainbow-2.png);
+  background-size: 100%;
+  background-repeat: no-repeat;
+  height: 100%;
+}
+
+.upload-input {
+  padding: 10px 200px;
+  position: relative;
+  text-align: right;
+  -moz-opacity:0 ;
+  filter:alpha(opacity: 0);
+  opacity: 0;
+  z-index: 2;
 }
 
 #score-box {
@@ -81,8 +103,8 @@ a {
 
 #game {
   width: 800px;
-  margin: auto;
-  border: 1px solid white;
+  margin: -50px auto auto auto;
+  border: 3px solid white;
   background-color: #191919;
 }
 
@@ -90,7 +112,7 @@ a {
   width: 50%;
   height: 200px;
   margin: auto;
-  margin-top: 80px;
+  padding: 50px;
   text-align: center;
 }
 

@@ -5,7 +5,7 @@ export default (props) => {
   return (
     <li>
       <Link to={`/game/${props.song.fileName}`}>
-        <span>{props.song.title}</span>
+        <span>"{props.song.title}" - {props.song.artist}</span>
       </Link>
     </li>
   );

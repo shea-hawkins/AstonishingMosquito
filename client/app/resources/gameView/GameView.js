@@ -6,7 +6,7 @@ class GameView extends React.Component {
     // Here we will create the new game instance
     // and bind that game instance to the dom and pass the
     // current song.
-    new Game('game');
+    new Game('game', this.props.params.fileName);
   }
   render() {
     return (

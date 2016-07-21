@@ -7,6 +7,11 @@ export default class AudioController extends Controller {
     this.node = document.createElement('AUDIO');
     opts.node.appendChild(this.node);
 
+    setInterval(() => {
+        var time = this.node.currentTime;
+        var duration = this.node.duration;
+        store.dispatch({type: 'updateTime', data: {elapsed: time, duration: duration}});
+    }, 250);
     // At the moment, only the first observable is the one generated
     this.observables[0] = new RX.Subject();
 

@@ -1,4 +1,4 @@
-import { getStore } from './GameModel';
+import { getStore, addStoreListener } from './GameModel';
 import Beatbox from './resources/entities/Beatbox';
 import Player from './resources/entities/Player';
 import Wave from './resources/entities/Wave';
@@ -11,12 +11,12 @@ class Game {
     var renderer = new PIXI.autoDetectRenderer(800, 600);
     this.node.appendChild(renderer.view);
 
+    this.store = getStore();
+
     var collisionDetector = new CollisionDetector(this.store);
     var audioController = new AudioController(this.store, {node: this.node, fileName: song});
     var stage = new PIXI.Container();
 
-
-    this.store = getStore();
     this.store.dispatch({type: 'addGameItem', data: {key: 'collisionDetector', val: collisionDetector}});
     this.store.dispatch({type: 'addGameItem', data: {key: 'audioController', val: audioController}});
     this.store.dispatch({type: 'addGameItem', data: {key: 'stage', val: stage}});
@@ -26,7 +26,9 @@ class Game {
     var player = new Player(this.store);
     this.render();
   }
-
+  addEventListener(event, callback) {
+    addStoreListener(event, callback);
+  }
   render() {
     var state = this.store.getState();
     state.entities.forEach((entity) => {

@@ -11,9 +11,12 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "bluebird": "^3.4.1",
     "express": "^4.14.0",
+    "md5-file": "^3.1.1",
     "morgan": "^1.7.0",
-    "nodemon": "^1.9.2"
+    "nodemon": "^1.9.2",
+    "redis": "^2.6.2"
   },
   "dependencies": {
     "multer": "^1.1.0",

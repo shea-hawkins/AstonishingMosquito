@@ -4,7 +4,8 @@ var state = {
   entities: [],
   stage: {},
   lives: 5,
-  time: {elapsed: 0, duration: 0}
+  time: {elapsed: 0, duration: 0},
+  stateName: 'PLAYING'
 };
 
 var storeListeners = {
@@ -38,7 +39,7 @@ var actions = {
   },
   gameOver: function(prevState) {
     return Object.assign({}, prevState, {
-      stateName: 'gameOver'
+      stateName: 'GAMEOVER'
     });
   },
   addGameItem: function(prevState, item) {
@@ -60,7 +61,7 @@ var reducer = function(prevState = state, action) {
     var newState = actions[action.type](prevState, action.data);
     if (storeListeners[action.type]) {
       // Allows listeners to be added to the store for any action.
-      storeListeners[action.type].forEach(listener => listener(newState, action));
+      storeListeners[action.type].forEach(listener => listener(newState, action.data));
     }
     return newState;
   } else {

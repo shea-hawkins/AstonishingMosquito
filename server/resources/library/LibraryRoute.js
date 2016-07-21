@@ -45,11 +45,15 @@ router.get('/', function(req, res) {
 });
 
 router.post('/', upload.single('song'), function(req, res) {
-  // md5file(req.file.filename).then(function (hash) {
-  //   console.log('hash', hash);
-  //   client.hmset(hash, req.file.filename);
-  // });
-  // res.sendStatus(201);
+  md5file(req.file.filename)
+  .then(function(hash) {
+    console.log('hash', hash);
+    client.hmset(hash, req.file.filename);
+  })
+  .then(function() { 
+    res.sendStatus(201); 
+  });
+
   // res.send({filename: req.file.filename});
 });
 

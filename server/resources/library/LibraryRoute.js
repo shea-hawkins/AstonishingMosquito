@@ -3,11 +3,13 @@ var fs = require('fs');
 var path = require('path');
 var mm = require('musicmetadata');
 var md5File = require('md5-file/promise');
+var redis = require("redis");
+var client = redis.createClient();
 
 var multer = require('multer');
 var upload = multer( {
   dest: path.join(__dirname + '/../../library/')
-} );
+} ).single('song');
 
 var router = express.Router();
 
@@ -43,19 +45,41 @@ router.get('/', function(req, res) {
     res.send(metadata);
   });
 });
+ 
+router.post('/', function (req, res) {
+  upload(req, res, function (err) {
+    if (err) {
+      console.log('multer error', err);
+      return;
+    }
+    md5File(req.file.path)
+    .then(function(hash) {
+      console.log('md5file hash is', hash);
+      console.log('body is', req.file.filename);
+      client.hmset(hash, {'filename': req.file.filename}); // leave as filename for now and replace out with contents needed for audiocontroller
+    }).then(function() {
+      res.sendStatus(201);
+    })
 
-router.post('/', upload.single('song'), function(req, res) {
-  md5file(req.file.filename)
-  .then(function(hash) {
-    console.log('hash', hash);
-    client.hmset(hash, req.file.filename);
-  })
-  .then(function() { 
-    res.sendStatus(201); 
+    // Everything went fine 
   });
-
-  // res.send({filename: req.file.filename});
 });
+
+// router.post('/', upload.any(), function(req, res) {
+//   console.log('received post request');
+//   console.log('path to file', req.file.path);
+//   md5file(req.file.path)
+//   .then(function(hash) {
+//     console.log('md5file hash is', hash);
+//     console.log('body is', req.file.filename);
+//     client.hmset(hash, req.file.filename); // leave as filename for now and replace out with contents needed for audiocontroller
+//   })
+//   .then(function() { 
+//     res.sendStatus(201); 
+//   });
+
+//   // res.send({filename: req.file.filename});
+// });
 
 
 

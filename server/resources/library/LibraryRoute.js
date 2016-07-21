@@ -15,31 +15,14 @@ var router = express.Router();
 
 router.get('/', function(req, res) {
   return new Promise(function(resolve, reject) {
-    fs.readdir(path.join(__dirname + '/../../library'), 'utf8', function(err, files) {
-      if (err) {
-        reject(err);
-      } else {
-        files = files.filter(function(item) {
-          return !(/(^|\/)\.[^\/\.]/g).test(item);
-        });
-        resolve(files);
+    client.hgetall('music library', function(err, libraryHash) {
+      console.log('object', libraryHash);
+      var songs = [];
+      for (var songHash in libraryHash) {
+        songs.push(JSON.parse(libraryHash[songHash]));
       }
+      resolve(songs);
     });
-  })
-  .then(function(songFiles) {
-    var promises = [];
-    songFiles.forEach(function(fileName) {
-      promises.push(new Promise(function (resolve,reject) {
-        mm(fs.createReadStream(path.join(__dirname + '/../../library/' + fileName)), function (err, metadata) {
-          // Coverart is not currently processed,
-          // so it is removed from the response.
-          delete metadata.picture;
-          metadata.fileName = fileName;
-          resolve(metadata);
-        });
-      }));
-    });
-    return Promise.all(promises);
   })
   .then(function(metadata) {
     res.send(metadata);
@@ -52,11 +35,8 @@ router.post('/', function (req, res) {
       console.log('multer error', err);
       return;
     }
-
     new Promise(function(resolve, reject) {
       mm(fs.createReadStream(path.join(__dirname + '/../../library/' + req.file.filename)), function (err, metadata) {
-        // Coverart is not currently processed,
-        // so it is removed from the response.
         delete metadata.picture;
         metadata.fileName = req.file.filename;
         resolve(metadata);
@@ -65,15 +45,12 @@ router.post('/', function (req, res) {
     .then(function(metadata) {
       md5File(req.file.path)
       .then(function(hash) {
-        client.hmset(hash, 'metadata', JSON.stringify(metadata)); // leave as filename for now and replace out with contents needed for audiocontroller
+        client.hset('music library', hash, JSON.stringify(metadata));
       }).then(function() {
         res.sendStatus(201);
       })
     });
-    // Everything went fine 
   });
 });
-
-
 
 module.exports = router;

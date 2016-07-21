@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 var actions = {
   updatingTime: function(prevState, data) {
     var game = prevState.game;
-    game.elapsed = data.elapsed;
-    game.duration = data.duration;
+    game.time.elapsed = data.elapsed;
+    game.time.duration = data.duration;
     return Object.assign({}, prevState, {
       game: game
     });
@@ -27,7 +27,8 @@ var actions = {
 
 var mapStateToProps = function(state) {
   return {
-    time: state.game.time,
+    elapsed: state.game.time.elapsed,
+    duration: state.game.time.duration,
     lives: state.game.lives,
     stateName: state.game.stateName
   };
@@ -40,7 +41,7 @@ var mapDispatchToProps = function(dispatch) {
     },
     updateLives: (lives) => {
       dispatch({type: 'updatingLives', data: lives });
-    }
+    },
     updateGameState: () => {
       dispatch({type: 'gameOver'});
     }

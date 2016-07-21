@@ -9,7 +9,7 @@ export default (props) => {
       </div>
       <div id='time-box'>
         <span>remaining time:</span>
-        <div id='remaining-time'>meow</div>
+        <div id='remaining-time'>{props.time}</div>
         <span>min second</span>
       </div>
     </header>

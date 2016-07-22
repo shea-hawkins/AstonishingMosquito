@@ -1,6 +1,7 @@
 import React from 'react';
 import Game from '../../../game/Game.js';
 import GameRendererView from './GameRendererView.js';
+import GameOverModal from '../stateless/GameOverModal.js';
 import ScoreView from '../stateless/ScoreView.js';
 import SongQueueView from '../stateless/SongQueueView.js';
 import { connection } from './GameModel';
@@ -21,12 +22,16 @@ class GameView extends React.Component {
       this.props.updateGameState(newState.stateName);
     });
   }
+  // add gameover modal below at 31.5 
+  // with property stateName = this.props.stateName 
   render() {
     return (
       <div className="game-view">
         <ScoreView time={this.props.elapsed} duration={this.props.duration} lives={this.props.lives} stateName={this.props.stateName}/>
         <GameRendererView />
         <SongQueueView fileName={this.props.params.fileName} title={this.props.location.search}/>
+        <SongQueueView fileName={this.props.params.fileName}/>
+        <GameOverModal status={this.props.stateName}/>
       </div>
     );
   }

@@ -30,7 +30,7 @@ var mapStateToProps = function(state) {
     elapsed: state.game.time.elapsed,
     duration: state.game.time.duration,
     lives: state.game.lives,
-    stateName: state.game.stateName
+    stateName: state.game.stateName // this is the prop that we pass down to the modal 
   };
 };
 

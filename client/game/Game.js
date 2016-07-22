@@ -8,7 +8,7 @@ import AudioController from './resources/controllers/AudioController';
 class Game {
   constructor (id, song) {
     this.node = document.getElementById(id);
-    var renderer = new PIXI.autoDetectRenderer(800, 600);
+    var renderer = new PIXI.autoDetectRenderer(1200, 600, {transparent: true});
     this.node.appendChild(renderer.view);
 
     this.store = getStore();

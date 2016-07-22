@@ -14,6 +14,12 @@ export default class Player extends Entity {
 
       this.sprite = new PIXI.Sprite.fromImage(this.state.baseImg + this.state.stateName + '.png');
 
+      this.sprite.width = 75;
+      this.sprite.height = 75;
+      // makes the collidable area of the sprite a bit towards the center
+      this.collisionWidth = this.sprite.width * this.sprite.scale / 3;
+      this.collisionHeight = this.sprite.height * this.sprite.scale / 3;
+
       this.sprite.position.x = 350;
       this.sprite.position.y = 400;
 
@@ -29,7 +35,7 @@ export default class Player extends Entity {
           // this.container.addChild(this.sprite);
           // remove jumping sprite from stage
           // add it back to stage
-          setTimeout(this.changeState.bind(this, 'STANDING'), 500);
+          setTimeout(this.changeState.bind(this, 'STANDING'), 150);
         }
       }.bind(this));
 
@@ -60,7 +66,8 @@ export default class Player extends Entity {
       var oldSprite = this.sprite;
 
       this.sprite = new PIXI.Sprite.fromImage(this.state.baseImg + this.state.stateName + '.png');
-
+      this.sprite.width = oldSprite.width;
+      this.sprite.height = oldSprite.height;
       this.sprite.position.x = oldSprite.position.x;
       this.sprite.position.y = oldSprite.position.y;
 

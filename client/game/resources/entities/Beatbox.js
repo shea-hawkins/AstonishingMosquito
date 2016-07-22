@@ -5,15 +5,15 @@ export default class Beatbox extends Entity {
     constructor(store) {
       super(store);
       this.sprite = new PIXI.Sprite.fromImage('assets/img/beatbox.png');
-      this.sprite.width = 80;
-      this.sprite.height = 80;
+      this.sprite.width = 65;
+      this.sprite.height = 65;
       this.sprite.anchor.set(0.5);
       this.sprite.position.x = 200;
       this.sprite.position.y = 200;
       this.container.addChild(this.sprite);
 
       this.subject = this.store.getState().audioController.observables[0];
-      this.subject.throttleTime(600).subscribe(val => {
+      this.subject.throttleTime(350).subscribe(val => {
         this.emitWave();
       })
       // .subscribe(val => {

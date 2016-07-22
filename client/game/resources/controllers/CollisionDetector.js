@@ -19,12 +19,12 @@ export default class CollisionDetector extends Controller {
     var dist = function(p1, p2) {
       return Math.sqrt(Math.pow(p1.x - p2.x, 2) + Math.pow(p1.y - p2.y, 2));
     };
-    // Assumes that the entity is an instanceof player
+    // Assumes that entity is an instanceof player
     if (otherEntity instanceof Wave) {
       var waveGlobals = otherEntity.graphics.toGlobal(new PIXI.Point(0, 0));
       var spriteGlobals = entity.sprite.toGlobal(new PIXI.Point(0, 0));
-      var width = entity.sprite.width;
-      var height = entity.sprite.height;
+      var width = entity.collisionWidth;
+      var height = entity.collisionHeight;
       var corners = [];
       // top left corner:
       corners.push(new PIXI.Point(

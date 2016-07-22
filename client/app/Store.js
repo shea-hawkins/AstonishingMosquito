@@ -11,7 +11,7 @@ var state = {
   },
   game: {
     time: { elapsed: 0, duration: 0 },
-    lives: 0,
+    lives: 5,
     stateName: 'LOADING'
   }
 };

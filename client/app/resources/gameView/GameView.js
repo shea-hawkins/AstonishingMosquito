@@ -14,11 +14,17 @@ class GameView extends React.Component {
     game.addEventListener('updateTime', (newState, time) => {
       this.props.updateTime(time);
     });
+    game.addEventListener('decrementLife', (newState) => {
+      this.props.updateLives(newState.lives);
+    });
+    game.addEventListener('gameOver', (newState) => {
+      this.props.updateGameState(newState.stateName);
+    });
   }
   render() {
     return (
       <div>
-        <ScoreView time={this.props.elapsed} duration={this.props.duration}/>
+        <ScoreView time={this.props.elapsed} duration={this.props.duration} lives={this.props.lives} stateName={this.props.stateName}/>
         <GameRendererView />
         <SongQueueView fileName={this.props.params.fileName}/>
       </div>

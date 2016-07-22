@@ -5,7 +5,8 @@ export default (props) => {
     <header>
       <div id='score-box'>
         <span>current lives:</span>
-        <div id='current-score'>meow</div>
+        <div id='current-score'>{props.lives}</div>
+        <span>{props.stateName}</span>
       </div>
       <div id='time-box'>
         <span>remaining time:</span>

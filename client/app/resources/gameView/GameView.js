@@ -26,7 +26,7 @@ class GameView extends React.Component {
       <div className="game-view">
         <ScoreView time={this.props.elapsed} duration={this.props.duration} lives={this.props.lives} stateName={this.props.stateName}/>
         <GameRendererView />
-        <SongQueueView fileName={this.props.params.fileName}/>
+        <SongQueueView fileName={this.props.params.fileName} title={this.props.location.search}/>
       </div>
     );
   }

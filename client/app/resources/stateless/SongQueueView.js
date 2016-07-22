@@ -1,10 +1,9 @@
 import React from 'react';
 
 export default (props) => {
-  console.log(props);
   return (
-    <footer>
-      <h1>Now Playing: <span>{props.fileName}</span></h1>
-    </footer>
+    <div id='now-playing'>
+      <h1>Now Playing: <span>{props.title.substring(1)}</span></h1>
+    </div>
   );
 };

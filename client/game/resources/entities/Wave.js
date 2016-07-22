@@ -1,4 +1,5 @@
 import Entity from './Entity';
+import Player from './Player';
 
 export default class Wave extends Entity {
     constructor(store, opts) {
@@ -9,6 +10,7 @@ export default class Wave extends Entity {
 
       this.color = opts.color || Math.floor(0x1000000 * Math.random());
       // this.color = opts.color || this.rainbow(Math.floor(Math.random() * (255 - 0 + 1)) + 0);
+      this.radius = 0;
       this.thickness = opts.thickness || Math.random() * 10 + 3;
       this.radius = opts.radius || 10;
       this.speed = opts.speed || .025;
@@ -19,6 +21,9 @@ export default class Wave extends Entity {
       this.graphics.blendMode = PIXI.BLEND_MODES.ADD;
       this.graphics.blur = new PIXI.filters.BlurFilter();
 
+      var timeToImpulse = opts.timeToImpulse || 500;
+      this.impulseTime = new Date().getTime() + timeToImpulse;
+      this.lastRenderTime = new Date().getTime();
       // Each entity has a container that is rendered. This is so that you can
       // have multiple graphics objects within the same entity. For instance,
       // let's say that we wanted to have the beatbox also contain a 'sound'
@@ -48,9 +53,27 @@ export default class Wave extends Entity {
         this.destroy();
         return;
       }
+      // refactor to an observable pattern placed on the collisionDetector
+      // collisionDetector would allow you to register distance updates on
+      // pairs of entities
+      var state = this.store.getState();
+      state.entities.forEach(entity => {
+        if (entity.renderable && entity instanceof Player) {
+          this.impulseRadius = state.collisionDetector.calculateDistances(entity, this)[0];
+        }
+      });
+
+      this.currentTime = new Date().getTime();
+      // No adjustments are made to the speed of the projectile once it is almost to the
+      // impulse time.
+      if (this.radius < this.impulseRadius && (this.impulseTime - this.currentTime) > 150) {
+        this.velocity = Math.abs((this.impulseRadius - this.radius) / (this.impulseTime - this.currentTime));
+
+      }
+      this.radius = this.radius + this.velocity * (this.currentTime - this.lastRenderTime);
+      this.lastRenderTime = new Date().getTime();
       this.graphics.clear();
       this.graphics.lineStyle(this.thickness, this.color);
       this.graphics.drawCircle(0, 0, this.radius);
-      this.radius += this.radius*this.speed;
     }
 }

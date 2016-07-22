@@ -31,7 +31,7 @@ class GameView extends React.Component {
         <GameRendererView />
         <SongQueueView fileName={this.props.params.fileName} title={this.props.location.search}/>
         <SongQueueView fileName={this.props.params.fileName}/>
-        <GameOverModal status={this.props.stateName}/>
+        <GameOverModal status={this.props.stateName} fileName={this.props.params.fileName}/>
       </div>
     );
   }

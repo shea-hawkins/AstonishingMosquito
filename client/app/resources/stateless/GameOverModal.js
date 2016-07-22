@@ -19,18 +19,13 @@ var contentStyle = {
   margin: '0',
   padding: '20px 20px 40px 20px',
   textAlign: 'center'
-  // width: '40%',
-  // height: '30%'
 };
 
 export default class ModalExample extends React.Component {
   componentDidUpdate(prevProps) {
-    console.log('status of game over', this.props.status);
     if (this.props.status === 'GAMEOVER' && prevProps.status !== 'GAMEOVER') {
       this.showModal();
-      // debugger;
     } else if (this.props.status !== 'GAMEOVER') {
-      // debugger;
       this.hideModal();
     }
   }

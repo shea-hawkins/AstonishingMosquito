@@ -19,7 +19,10 @@ export default class AudioController extends Controller {
 
     this.context = new AudioContext();
     this.source = this.context.createMediaElementSource(this.node);
-    this.source.connect(this.context.destination);
+    var delay = this.context.createDelay(2);
+    this.source.connect(delay);
+    delay.delayTime.value = 1;
+    delay.connect(this.context.destination);
     this.getIdealThreshold(opts.fileName).then(threshold => {
       this.subscribeSubjectAtThreshold(this.observables[0], threshold);
       this.node.play();

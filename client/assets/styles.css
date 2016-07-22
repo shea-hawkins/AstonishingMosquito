@@ -133,10 +133,25 @@ a {
   text-align: center;
   width: 75%;
   margin: auto;
-/*  overflow: hidden;
-  position: relative;*/
 }
 
 .min {
   padding-right: 20px;
+}
+
+#game-over {
+  font-size: 3em;
+  font-weight: 500;
+  color: red;
+}
+
+#try-again {
+  display: flex;
+  font-size: 1em;
+  justify-content: space-around;
+  padding: 20px;
+}
+
+.black-text {
+  color: black;
 }

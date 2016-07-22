@@ -47,14 +47,14 @@ export default class ModalExample extends React.Component {
                 </div>
                 <div id="try-again">
                   <div>
-                    <Link to={`/game/${this.props.fileName}`}>
-                      <img src='img/try-again.png' /> 
+                    <div onClick={() => location.reload(true)}>
+                      <img src='assets/img/try-again.png' /> 
                       <figcaption className="black-text"> Try Again </figcaption> 
-                    </Link>
+                    </div>
                   </div>
                   <div>
                     <Link to={`/`}>
-                      <img src='img/try-again.png' /> 
+                      <img src='assets/img/game-over.png' /> 
                       <figcaption className="black-text"> Choose Another Song </figcaption> 
                     </Link>
                     

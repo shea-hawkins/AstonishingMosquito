@@ -18,13 +18,16 @@ footer {
 }
 
 ul {
-  columns: 2;
   list-style-type: none;
   padding: 0;
   margin: 0;
   margin-top: 40px;
-  -webkit-columns: 2;
-  -moz-columns: 2;
+  -moz-column-count: 2;
+  -moz-column-gap: 20px;
+  -webkit-column-count: 2;
+  -webkit-column-gap: 20px;
+  -webkit-column-break-inside: avoid;
+  column-count: 2;
 }
 
 li {
@@ -35,12 +38,16 @@ li {
   margin-right: 10px;
   padding: 10px;
   opacity: 0.5;
+  -webkit-column-break-inside: avoid;
+  page-break-inside: avoid;
+  break-inside: avoid;
+
 }
 
 input {
   margin: auto;
   margin-bottom: 20px;
-  padding: 10px;
+  padding: 10px 100px;
   border: 1px solid white;
   background-color: #191919;
   font-size: .8em;
@@ -49,7 +56,7 @@ input {
   display: block;
 }
 
-li:hover, button:hover {
+li:hover, button:hover .submit:hover{
   opacity: 1;
 }
 
@@ -58,15 +65,34 @@ a {
 }
 
 .container {
-  background: url('transparent-rainbow.png') center / cover;
-  width: 100%;
-  min-height: 100%;
+  overflow-y: hidden;
+}
+
+.library-view {
+  background-image: url(img/transparent-rainbow-1.png);
+  background-size: 100%;
+  background-repeat: no-repeat;
+  height: 100%;
+}
+
+.game-view {
+  background-image: url(img/transparent-rainbow-2.png);
+  background-size: 100%;
+  background-repeat: no-repeat;
+  height: 100%;
+}
+
+.custom-file-upload {
+  padding: 10px 150px 10px 250px;
+  display: inline-block;
+  cursor: pointer;
 }
 
 #score-box {
   float: left;
   text-align: center;
   width: 20%;
+  margin-top: 20px;
 }
 
 #current-score, #remaining-time {
@@ -77,12 +103,13 @@ a {
   float: right;
   text-align: center;
   width: 20%;
+  margin-top: 20px;
 }
 
 #game {
   width: 800px;
-  margin: auto;
-  border: 1px solid white;
+  margin: -50px auto auto auto;
+  border: 3px solid white;
   background-color: #191919;
 }
 
@@ -90,7 +117,7 @@ a {
   width: 50%;
   height: 200px;
   margin: auto;
-  margin-top: 80px;
+  padding: 50px;
   text-align: center;
 }
 
@@ -106,4 +133,10 @@ a {
   text-align: center;
   width: 75%;
   margin: auto;
+/*  overflow: hidden;
+  position: relative;*/
+}
+
+.min {
+  padding-right: 20px;
 }

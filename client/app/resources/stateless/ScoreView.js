@@ -11,7 +11,7 @@ export default (props) => {
       <div id='time-box'>
         <span>remaining time:</span>
         <div id='remaining-time'>{Math.floor(props.duration - props.time)}</div>
-        <span>min second</span>
+      <span> seconds </span>
       </div>
     </header>
   );

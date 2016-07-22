@@ -60,6 +60,7 @@ var mapDispatchToProps = function(dispatch) {
         .then((songs) => {
           songs = songs.map((song, i) => {
             song.id = i;
+            console.log('returning song', song);
             return song;
           });
           dispatch({type: 'receiveSongList', data: songs});

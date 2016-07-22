@@ -14,7 +14,7 @@ class Game {
     this.store = getStore();
 
     var collisionDetector = new CollisionDetector(this.store);
-    var audioController = new AudioController(this.store, {node: this.node, fileName: 'd616a066d86c19941cef0d59db569bd8'});
+    var audioController = new AudioController(this.store, {node: this.node, fileName: song});
     var stage = new PIXI.Container();
 
     this.store.dispatch({type: 'addGameItem', data: {key: 'collisionDetector', val: collisionDetector}});

@@ -21,7 +21,7 @@ export default class Wave extends Entity {
       this.graphics.blendMode = PIXI.BLEND_MODES.ADD;
       this.graphics.blur = new PIXI.filters.BlurFilter();
 
-      var timeToImpulse = opts.timeToImpulse || 500;
+      var timeToImpulse = opts.timeToImpulse || 600;
       this.impulseTime = new Date().getTime() + timeToImpulse;
       this.lastRenderTime = new Date().getTime();
       // Each entity has a container that is rendered. This is so that you can

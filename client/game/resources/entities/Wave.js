@@ -68,12 +68,18 @@ export default class Wave extends Entity {
       // impulse time.
       if (this.radius < this.impulseRadius && (this.impulseTime - this.currentTime) > 150) {
         this.velocity = Math.abs((this.impulseRadius - this.radius) / (this.impulseTime - this.currentTime));
-
       }
       this.radius = this.radius + this.velocity * (this.currentTime - this.lastRenderTime);
       this.lastRenderTime = new Date().getTime();
       this.graphics.clear();
-      this.graphics.lineStyle(this.thickness, this.color);
+
+      if (this.radius < this.impulseRadius) {
+        this.renderColor = 0x666666;
+      } else {
+        this.renderColor = this.color;
+      }
+      
+      this.graphics.lineStyle(this.thickness, this.renderColor);
       this.graphics.drawCircle(0, 0, this.radius);
     }
 }

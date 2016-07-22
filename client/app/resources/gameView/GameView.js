@@ -8,9 +8,6 @@ import { connection } from './GameModel';
 
 class GameView extends React.Component {
   componentDidMount() {
-    // Here we will create the new game instance
-    // and bind that game instance to the dom and pass the
-    // current song.
     var game = new Game('game', this.props.params.fileName);
     game.addEventListener('updateTime', (newState, time) => {
       this.props.updateTime(time);
@@ -22,8 +19,6 @@ class GameView extends React.Component {
       this.props.updateGameState(newState.stateName);
     });
   }
-  // add gameover modal below at 31.5 
-  // with property stateName = this.props.stateName 
   render() {
     return (
       <div className="game-view">
@@ -31,7 +26,7 @@ class GameView extends React.Component {
         <GameRendererView />
         <SongQueueView fileName={this.props.params.fileName} title={this.props.location.search}/>
         <SongQueueView fileName={this.props.params.fileName}/>
-        <GameOverModal status={this.props.stateName} fileName={this.props.params.fileName}/>
+        <GameOverModal status={this.props.stateName}/>
       </div>
     );
   }

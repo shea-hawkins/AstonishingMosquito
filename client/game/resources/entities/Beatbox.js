@@ -8,8 +8,8 @@ export default class Beatbox extends Entity {
       this.sprite.width = 65;
       this.sprite.height = 65;
       this.sprite.anchor.set(0.5);
-      this.sprite.position.x = 200;
-      this.sprite.position.y = 200;
+      this.sprite.position.x = 300;
+      this.sprite.position.y = 300;
       this.container.addChild(this.sprite);
 
       this.subject = this.store.getState().audioController.observables[0];

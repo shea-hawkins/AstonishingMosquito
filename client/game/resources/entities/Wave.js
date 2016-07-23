@@ -21,7 +21,7 @@ export default class Wave extends Entity {
       this.graphics.blendMode = PIXI.BLEND_MODES.ADD;
       this.graphics.blur = new PIXI.filters.BlurFilter();
 
-      var timeToImpulse = opts.timeToImpulse || 600;
+      var timeToImpulse = opts.timeToImpulse || 550;
       this.impulseTime = new Date().getTime() + timeToImpulse;
       this.lastRenderTime = new Date().getTime();
       // Each entity has a container that is rendered. This is so that you can
@@ -46,7 +46,7 @@ export default class Wave extends Entity {
         return 'rgb(' + r + ',' + g + ',' + b + ')';
     }
 
-
+    
     render() {
       if (!this.inBounds()) {
         // Calls the Entity destruction method, which handles all cleanup
@@ -78,7 +78,7 @@ export default class Wave extends Entity {
       } else {
         this.renderColor = this.color;
       }
-      
+
       this.graphics.lineStyle(this.thickness, this.renderColor);
       this.graphics.drawCircle(0, 0, this.radius);
     }

@@ -8,7 +8,7 @@ import AudioController from './resources/controllers/AudioController';
 class Game {
   constructor (id, song) {
     this.node = document.getElementById(id);
-    var renderer = new PIXI.autoDetectRenderer(800, 600);
+    var renderer = new PIXI.autoDetectRenderer(1200, 600, {transparent: true});
     this.node.appendChild(renderer.view);
 
     this.store = getStore();
@@ -31,6 +31,9 @@ class Game {
   }
   render() {
     var state = this.store.getState();
+    if (state.stateName === 'GAMEOVER') {
+      state.audioController.pause();
+    }
     state.entities.forEach((entity) => {
       // If the entity has left the screen or if it is currently
       // awaiting grabage colleciton, renderable will be set to false.

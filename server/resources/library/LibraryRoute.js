@@ -28,7 +28,7 @@ router.get('/', function(req, res) {
     res.send(metadata);
   });
 });
- 
+
 router.post('/', function (req, res) {
   upload(req, res, function (err) {
     if (err) {
@@ -45,10 +45,15 @@ router.post('/', function (req, res) {
     .then(function(metadata) {
       md5File(req.file.path)
       .then(function(hash) {
-        client.hset('music library', hash, JSON.stringify(metadata));
+        return client.hset('music library', hash, JSON.stringify(metadata));
       }).then(function() {
         res.sendStatus(201);
+      }).catch(function(error) {
+        console.log('database error', error);
       })
+    })
+    .catch(function(error) {
+      console.log('mss error', error);
     });
   });
 });

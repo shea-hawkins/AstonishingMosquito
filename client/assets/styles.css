@@ -17,6 +17,24 @@ header {
   height: 100px;
 }
 
+h1 {
+  font-size: 4em;
+}
+
+h2 {
+  font-size: 2em;
+}
+
+p {
+  font-size: 1.3em;
+  font-weight: 300;
+  width: 50%;
+  margin: auto;
+  padding: 10px;
+  text-align: center;
+}
+
+
 ul {
   list-style-type: none;
   padding: 0;
@@ -33,9 +51,7 @@ ul {
 li {
   border: 1px solid white;
   background-color: #191919;
-  margin-bottom: 25px;
-  margin-left: 10px;
-  margin-right: 10px;
+  margin: 0 10px 25px 10px;
   padding: 10px;
   opacity: 0.5;
   -webkit-column-break-inside: avoid;
@@ -56,16 +72,27 @@ input {
   display: block;
 }
 
-li:hover, button:hover .submit:hover{
+li:hover, button:hover {
   opacity: 1;
 }
 
 a {
   color: white;
+  text-decoration: none;
 }
 
 .container {
   overflow-y: hidden;
+}
+
+.welcome-view {
+  background-image: url(img/transparent-rainbow-0.png);
+  background-size: 100%;
+  background-repeat: no-repeat;
+  height: 100%;
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: space-around;
 }
 
 .library-view {
@@ -80,6 +107,53 @@ a {
   background-size: 100%;
   background-repeat: no-repeat;
   height: 100%;
+}
+
+#made-at-hr {
+  position: fixed; 
+  top: 0; 
+  right: 0; 
+  border: 0;
+}
+
+#welcome-content {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.start-playing {
+  display: flex;
+  border: 1px solid white;
+  width: 50%;
+  background-color: #191919;
+  margin: 30px 10px;
+  padding: 10px;
+  opacity: 0.5;
+  font-size: 1.3em;
+  justify-content: center;
+  align-self: center;
+}
+
+.start-playing:hover {
+  opacity: 1;
+}
+
+#credits {
+  display: flex;
+  align-items: center;
+  flex-flow: column wrap;
+}
+
+#authors {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+#tech-stack {
+  display: flex;
+  background-color: rgba(255, 255, 255, 0.15);
+  justify-content: space-around;
+  width: 100%;
 }
 
 .custom-file-upload {
@@ -155,3 +229,5 @@ a {
 .black-text {
   color: black;
 }
+
+

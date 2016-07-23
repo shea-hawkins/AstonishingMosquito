@@ -12,7 +12,7 @@ export default class Beatbox extends Entity {
       this.sprite.position.y = 300;
       this.container.addChild(this.sprite);
 
-      this.subject = this.store.getState().audioController.observables[0];
+      this.subject = this.store.getState().audioController.observables['lowpass'];
       this.subject.throttleTime(350).subscribe(val => {
         this.emitWave();
       })

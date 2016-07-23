@@ -1,16 +1,15 @@
 import React from 'react';
-import { Motion, spring } from 'react-motion';
+// import { Motion, spring } from 'react-motion';
 import { Link } from 'react-router';
 
 export default () => {
   return (
-    <Motion defaultStyle={{left: 1200}} style={{left: spring(0)}}>
-      {interpolatingStyle => 
+    //<Motion defaultStyle={{left: 1200}} style={{left: spring(0)}}>
+      //{interpolatingStyle => 
 
-      { 
-      console.log('interpolating style', interpolatingStyle);
-      return (
-        <div className="welcome-view" style={interpolatingStyle}> 
+      //{ 
+      //return (
+        <div className="welcome-view"> 
           <div>
             <a href="http://hackreactor.com">
               <img id="made-at-hr" src="http://i.imgur.com/x86kKmF.png" alt="Built at Hack Reactor"/>
@@ -36,9 +35,9 @@ export default () => {
               <img src="assets/img/webpack.png" alt="webpack-logo"/> 
             </div>
           </div>
-        </div> )
-        }
-      }
-    </Motion>
+        </div> 
+        //)}
+      //}
+    //</Motion>
   );
 };

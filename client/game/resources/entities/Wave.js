@@ -46,7 +46,7 @@ export default class Wave extends Entity {
         return 'rgb(' + r + ',' + g + ',' + b + ')';
     }
 
-
+    
     render() {
       if (!this.inBounds()) {
         // Calls the Entity destruction method, which handles all cleanup

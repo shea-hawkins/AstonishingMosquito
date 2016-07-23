@@ -28,7 +28,10 @@ h2 {
 p {
   font-size: 1.3em;
   font-weight: 300;
-  padding: 0 200px;
+  width: 50%;
+  margin: auto;
+  padding: 10px;
+  text-align: center;
 }
 
 
@@ -83,13 +86,13 @@ a {
 }
 
 .welcome-view {
-  display: flex;
   background-image: url(img/transparent-rainbow-0.png);
   background-size: 100%;
   background-repeat: no-repeat;
   height: 100%;
-  align-items: center;
-  justify-content: center;
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: space-around;
 }
 
 .library-view {
@@ -104,6 +107,13 @@ a {
   background-size: 100%;
   background-repeat: no-repeat;
   height: 100%;
+}
+
+#made-at-hr {
+  position: fixed; 
+  top: 0; 
+  right: 0; 
+  border: 0;
 }
 
 #welcome-content {
@@ -127,6 +137,23 @@ a {
 
 .start-playing:hover {
   opacity: 1;
+}
+
+#credits {
+  display: flex;
+  align-items: center;
+  flex-flow: column wrap;
+}
+
+#authors {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+#tech-stack {
+  display: flex;
+  background-color: rgba(255, 255, 255, 0.15);
+  justify-content: space-around;
+  width: 100%;
 }
 
 .custom-file-upload {

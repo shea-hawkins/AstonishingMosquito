@@ -31,6 +31,9 @@ class Game {
   }
   render() {
     var state = this.store.getState();
+    if (state.stateName === 'GAMEOVER') {
+      state.audioController.pause();
+    }
     state.entities.forEach((entity) => {
       // If the entity has left the screen or if it is currently
       // awaiting grabage colleciton, renderable will be set to false.

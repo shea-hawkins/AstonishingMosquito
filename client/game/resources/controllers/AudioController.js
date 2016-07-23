@@ -51,6 +51,9 @@ export default class AudioController extends Controller {
     filter.connect(peakFinder);
     peakFinder.connect(this.context.destination);
   }
+  pause() {
+    this.node.pause();
+  }
   getPeaksAtThreshold(data, threshold) {
     var peaks = [];
     for (var i = 0; i < data.length;) {

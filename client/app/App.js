@@ -9,7 +9,6 @@ class App extends React.Component {
   render() {
     return (
       <div className='container'>
-       <!-- Adds small fade effect to page load --> 
         <RouteTransition 
             pathname={this.props.location.pathname}
             atEnter={{ opacity: 0 }}

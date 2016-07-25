@@ -26,7 +26,7 @@ class LibraryView extends React.Component {
                   })}
                 </ul>
               </div>
-              <LoadingModal show={ this.props.uploading === true } />
+              <LoadingModal show={ this.props.stateName === 'LOADING' } />
             </div>
     );
   }

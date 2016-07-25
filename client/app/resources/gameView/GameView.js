@@ -9,6 +9,7 @@ import { connection } from './GameModel';
 class GameView extends React.Component {
   componentDidMount() {
     var game = new Game('game', this.props.params.fileName);
+    this.game = game;
     game.addEventListener('updateTime', (newState, time) => {
       this.props.updateTime(time);
     });
@@ -18,6 +19,9 @@ class GameView extends React.Component {
     game.addEventListener('updateGameState', (newState, stateName) => {
       this.props.updateGameState(stateName);
     });
+  }
+  componentWillUnmount() {
+    this.game.destroy();
   }
   render() {
     return (

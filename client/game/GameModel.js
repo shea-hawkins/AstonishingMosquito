@@ -87,4 +87,8 @@ var addStoreListener = function(event, fun) {
   }
 }
 
-export { getStore, addStoreListener };
+var destroyListeners = function() {
+  storeListeners = [];
+}
+
+export { getStore, addStoreListener, destroyListeners };

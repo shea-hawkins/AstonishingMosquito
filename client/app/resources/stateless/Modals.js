@@ -77,7 +77,7 @@ class GameOverModal extends React.Component {
                     </div>
                   </div>
                   <div>
-                    <Link to={`/`}>
+                    <Link to={`*`}>
                       <img src='assets/img/game-over.png' />
                       <figcaption className="black-text"> Choose Another Song </figcaption>
                     </Link>

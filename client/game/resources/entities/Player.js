@@ -1,96 +1,90 @@
 import Entity from './Entity';
 
 export default class Player extends Entity {
-    constructor(store) {
-      super(store);
+  constructor(store) {
+    super(store);
 
-      this.lives = 4;
+    // Instantiate state and image path 
+    this.state = {
+      'stateName': 'STANDING',
+      'baseImg': 'assets/img/player-'
+    };
 
-      this.state = {
-        'stateName': 'STANDING',
-        'possibleStates': ['JUMPING', 'STANDING'],
-        'baseImg': 'assets/img/player-'
+    // Creates new sprite based upon state
+    this.sprite = new PIXI.Sprite.fromImage(this.state.baseImg + this.state.stateName + '.png');
+    this.sprite.width = 75;
+    this.sprite.height = 75;
+    this.sprite.position.x = 900;
+    this.sprite.position.y = 300;
+
+    // Places image at center of sprite & makes the collidable area at center of the sprite
+    this.sprite.anchor.set(.5);
+    this.collisionWidth = this.sprite.width / 4;
+    this.collisionHeight = this.sprite.height / 4;
+
+    // Add sprite to Entity's PIXI container 
+    this.container.addChild(this.sprite);
+
+    // Listen for user input
+    window.addEventListener("keydown", function(event) {
+      if (this.state.stateName === 'STANDING') {
+        this.changeState('JUMPING');
+        var stage = this.store.getState().stage;
+        // toggles Player sprite to bring in front of all other entities 
+        stage.removeChild(this.container);
+        stage.addChild(this.container);
+        // Reset Sprite to default state 
+        setTimeout(this.changeState.bind(this, 'STANDING'), 300);
       }
+    }.bind(this));
 
-      this.sprite = new PIXI.Sprite.fromImage(this.state.baseImg + this.state.stateName + '.png');
-
-      this.sprite.width = 75;
-      this.sprite.height = 75;
-      this.sprite.anchor.set(.5);
-      // makes the collidable area of the sprite a bit towards the center
-      this.collisionWidth = this.sprite.width / 4;
-      this.collisionHeight = this.sprite.height / 4;
-      this.sprite.position.x = 900;
-      this.sprite.position.y = 300;
-
-      this.container.addChild(this.sprite);
-
-      window.addEventListener("keydown", function(event) {
-        if (this.state.stateName === 'STANDING') {
-          this.changeState('JUMPING');
-          var stage = this.store.getState().stage;
-          stage.removeChild(this.container);
-          stage.addChild(this.container);
-          // this.container.removeChild(this.sprite);
-          // this.container.addChild(this.sprite);
-          // remove jumping sprite from stage
-          // add it back to stage
-          setTimeout(this.changeState.bind(this, 'STANDING'), 300);
+    // If Player is at risk to colliding with any other entity, call CollisionDetector 
+    this.store.getState().collisionDetector
+      .registerEntitySubject(this)
+      .distinctUntilChanged()
+      .subscribe(
+        // if potential collision is detected, then call collide function to perform necessary actions 
+        entity => {
+          this.collide(entity);
         }
-      }.bind(this));
+      );
+  }
 
-      // Any throttling/input manipulation can be done to the collision events.
-      this.store.getState().collisionDetector.registerEntitySubject(this)
-        .distinctUntilChanged()
-        .subscribe(
-          entity => {
-            this.collide(entity);
-          }
-        );
+  collide(otherEntity) {
+    var gameState = this.store.getState();
+    // If the player is jumping, do nothing
+    if (this.state.stateName === 'JUMPING') {
+      return;
     }
-
-    collide(otherEntity) {
-      var gameState = this.store.getState();
-      if (this.state.stateName === 'JUMPING') {
-        return;
-      } else if (gameState.lives <= 1) {
-        this.store.dispatch({type: 'updateGameState', data: 'GAMEOVER'});
-      } else {
-        this.store.dispatch({type: 'decrementLife', data: null});
-      }
+    // If gameState is on last life, set state to GAMEOVER
+    if (gameState.lives <= 1) {
+      this.store.dispatch({type: 'updateGameState', data: 'GAMEOVER'});
     }
+    // Otherwise, decrement life
+    this.store.dispatch({type: 'decrementLife', data: null});
+  }
 
-    changeState(stateName) {
-      this.state.stateName = stateName;
+  /** Toggles between different potential states and images for Player
+    */ 
+  changeState(stateName) {
+    this.state.stateName = stateName;
 
-      var oldSprite = this.sprite;
+    var oldSprite = this.sprite;
 
-      this.sprite = new PIXI.Sprite.fromImage(this.state.baseImg + this.state.stateName + '.png');
-      this.sprite.width = oldSprite.width;
-      this.sprite.height = oldSprite.height;
-      this.sprite.anchor.set(.5);
-      this.sprite.position.x = oldSprite.position.x;
-      this.sprite.position.y = oldSprite.position.y;
+    this.sprite = new PIXI.Sprite.fromImage(this.state.baseImg + this.state.stateName + '.png');
+    this.sprite.width = oldSprite.width;
+    this.sprite.height = oldSprite.height;
+    this.sprite.anchor.set(.5);
+    this.sprite.position.x = oldSprite.position.x;
+    this.sprite.position.y = oldSprite.position.y;
 
-      this.container.removeChild(oldSprite);
+    this.container.removeChild(oldSprite);
 
-      oldSprite.renderable = false;
-      oldSprite.destroy();
+    oldSprite.renderable = false;
+    oldSprite.destroy();
 
-      this.container.addChild(this.sprite);
-    }
+    this.container.addChild(this.sprite);
+  }
 
-    // jump(event) {
-    //   console.log(event.keycode);
-    //   if (this.state.stateName === 'STANDING') {
-    //     this.changeState.bind(this, 'JUMPING')
-    //   } else {
-    //     this.changeState.bind(this, 'STANDING')
-    //   }
-
-    // }
-
-    render() {
-
-    }
+  render() {}
 }

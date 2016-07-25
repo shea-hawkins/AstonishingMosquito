@@ -1,14 +1,14 @@
 var express = require('express');
 var fs = require('fs');
 var path = require('path');
-var mm = require('musicmetadata');
-var md5File = require('md5-file/promise');
 var redis = require("redis");
 var client = redis.createClient();
-
-var multer = require('multer');
-var upload = multer( {
-  dest: path.join(__dirname + '/../../library/')
+var mm = require('musicmetadata'); // Extract metadata from songs
+var md5File = require('md5-file/promise'); // Calculate the hash of song data for redis key
+var multer = require('multer'); // Multi-part form upload parser used to handle the song uploads
+// Directs song upload to be saved in server library folder 
+var upload = multer( { 
+  dest: path.join(__dirname + '/../../songLibrary/')
 } ).single('song');
 
 var router = express.Router();
@@ -16,7 +16,6 @@ var router = express.Router();
 router.get('/', function(req, res) {
   return new Promise(function(resolve, reject) {
     client.hgetall('music library', function(err, libraryHash) {
-      console.log('object', libraryHash);
       var songs = [];
       for (var songHash in libraryHash) {
         songs.push(JSON.parse(libraryHash[songHash]));
@@ -36,7 +35,7 @@ router.post('/', function (req, res) {
       return;
     }
     new Promise(function(resolve, reject) {
-      mm(fs.createReadStream(path.join(__dirname + '/../../library/' + req.file.filename)), function (err, metadata) {
+      mm(fs.createReadStream(path.join(__dirname + '/../../songLibrary/' + req.file.filename)), function (err, metadata) {
         delete metadata.picture;
         metadata.fileName = req.file.filename;
         resolve(metadata);

@@ -40,14 +40,12 @@ router.post('/', function (req, res) {
     }
     // Get metadata from song file
     new Promise(function(resolve, reject) {
-      console.log(fs.createReadStream(songLibraryPath + req.file.filename));
       mm(fs.createReadStream(songLibraryPath + req.file.filename), function (err, metadata) {
         if (err) {
           console.log('music metadata error -', err);
         }
         delete metadata.picture;
         metadata.fileName = req.file.filename;
-        console.log('metadata saved');
         resolve(metadata);
       });
     })
@@ -56,13 +54,11 @@ router.post('/', function (req, res) {
     })
     // Add the metadata to the redis database 
     .then(function(metadata) {
-
       // calculates file hash for redis key
       return md5File(req.file.path)
       .then(function(hash) {
         return client.hset('music library', hash, JSON.stringify(metadata));
       }).then(function() {
-        console.log('redis save', metadata);
         res.sendStatus(201);
       });
     })

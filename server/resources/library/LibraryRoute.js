@@ -16,13 +16,13 @@ var upload = multer( {
 
 var router = express.Router();
 
-
 router.get('/', function(req, res) {
   return new Promise(function(resolve, reject) {
-    client.hgetall('music library', function(err, libraryHash) {
+    // Retrieve metadata from redis database
+    client.hgetall('music library', function(err, library) {
       var songs = [];
-      for (var songHash in libraryHash) {
-        songs.push(JSON.parse(libraryHash[songHash]));
+      for (var songHash in library) {
+        songs.push(JSON.parse(library[songHash]));
       }
       resolve(songs);
     });

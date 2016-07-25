@@ -115,9 +115,9 @@ a {
 }
 
 #made-at-hr {
-  position: fixed; 
-  top: 0; 
-  right: 0; 
+  position: fixed;
+  top: 0;
+  right: 0;
   border: 0;
 }
 
@@ -218,10 +218,17 @@ a {
   padding-right: 20px;
 }
 
-#game-over {
+.modalTitle {
   font-size: 3em;
   font-weight: 500;
+}
+
+#game-over {
   color: red;
+}
+
+#loading {
+  color: black;
 }
 
 #try-again {
@@ -234,5 +241,3 @@ a {
 .black-text {
   color: black;
 }
-
-

@@ -33,7 +33,7 @@ export default class AudioController extends Controller {
     this.getIdealThreshold(opts.fileName).then(threshold => {
       this.store.dispatch({type: 'updateGameState', data: 'PLAYING'});
       this.subscribeSubjectAtThreshold(this.observables['lowpass'], threshold);
-      this.node.play();
+      setTimeout(() => this.node.play(), 1000);
     });
 
 
@@ -42,7 +42,6 @@ export default class AudioController extends Controller {
     var floatArray = new Float32Array(analyser.frequencyBinCount);
     var getData = function( ){
       analyser.getFloatFrequencyData(floatArray);
-      console.log(floatArray);
       observable.next(floatArray);
       requestAnimationFrame(getData);
     }

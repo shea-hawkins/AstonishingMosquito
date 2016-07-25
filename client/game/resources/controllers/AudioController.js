@@ -29,8 +29,9 @@ export default class AudioController extends Controller {
     analyser.connect(this.context.destination);
 
     this.subscribeSubjectToAnalyser(this.observables['visualization'], analyser);
-
+    this.store.dispatch({type: 'updateGameState', data: 'LOADING'});
     this.getIdealThreshold(opts.fileName).then(threshold => {
+      this.store.dispatch({type: 'updateGameState', data: 'PLAYING'});
       this.subscribeSubjectAtThreshold(this.observables['lowpass'], threshold);
       this.node.play();
     });

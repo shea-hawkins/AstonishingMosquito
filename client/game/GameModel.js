@@ -37,6 +37,11 @@ var actions = {
       lives: lives
     });
   },
+  updateGameState: function(prevState, stateName) {
+    return Object.assign({}, prevState, {
+      stateName: stateName
+    });
+  },
   gameOver: function(prevState) {
     return Object.assign({}, prevState, {
       stateName: 'GAMEOVER'

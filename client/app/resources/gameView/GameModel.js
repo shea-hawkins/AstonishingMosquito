@@ -16,7 +16,7 @@ var actions = {
       game: game
     });
   },
-  gameOver: function(prevState, data) {
+  updateGameState: function(prevState, data) {
     var game = prevState.game;
     game.stateName = data;
     return Object.assign({}, prevState, {
@@ -43,7 +43,7 @@ var mapDispatchToProps = function(dispatch) {
       dispatch({type: 'updatingLives', data: lives });
     },
     updateGameState: (stateName) => {
-      dispatch({type: 'gameOver', data: stateName });
+      dispatch({type: 'updateGameState', data: stateName });
     }
   }
 };

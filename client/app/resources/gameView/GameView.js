@@ -15,7 +15,7 @@ class GameView extends React.Component {
     game.addEventListener('decrementLife', (newState) => {
       this.props.updateLives(newState.lives);
     });
-    game.addEventListener('gameOver', (newState) => {
+    game.addEventListener('updateGameState', (newState) => {
       this.props.updateGameState(newState.stateName);
     });
   }

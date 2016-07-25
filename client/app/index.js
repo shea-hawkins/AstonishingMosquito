@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { Router, Route, IndexRoute, hashHistory } from 'react-router';
 
-import Store from './Store.js';
+import Store from './AppStore.js';
 import App from './App.js';
 import WelcomeView from './resources/stateless/WelcomeView';
 import GameView from './resources/gameView/GameView';

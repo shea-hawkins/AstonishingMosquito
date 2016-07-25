@@ -1,6 +1,7 @@
 import React from 'react';
-import { connection } from './LibraryModel';
 import { Motion, spring } from 'react-motion';
+import { connection } from './LibraryModel';
+import { LoadingModal } from '../stateless/Modals';
 import LibraryItemView from '../stateless/LibraryItemView';
 import SongUploadView from '../stateless/SongUploadView';
 
@@ -12,14 +13,10 @@ class LibraryView extends React.Component {
   }
   render() {
     return (
-      //<Motion defaultStyle={{right: 1200}} style={{right: spring(0)}}>
-      //{interpolatingStyle => 
-        //{ console.log('interpolating style', interpolatingStyle);
-          //return (
             <div className="library-view">
               <div id="upload">
                 <h2>Upload a Song</h2>
-                <SongUploadView onSubmit={this.props.onSubmit} />
+                <SongUploadView onSubmit={() => this.props.onSubmit().then(() => this.props.fetchSongList())} />
               </div>
               <div id="library-list">
                 <h2>Or Select a Favorite</h2>
@@ -29,10 +26,8 @@ class LibraryView extends React.Component {
                   })}
                 </ul>
               </div>
+              <LoadingModal show={ this.props.uploading === true } />
             </div>
-          //)}
-        //}
-      //</Motion>
     );
   }
 };

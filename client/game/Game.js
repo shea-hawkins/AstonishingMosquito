@@ -1,4 +1,4 @@
-import { getStore, addStoreListener } from './GameModel';
+import { getStore, addStoreListener, destroyListeners } from './GameModel';
 import Beatbox from './resources/entities/Beatbox';
 import Player from './resources/entities/Player';
 import Wave from './resources/entities/Wave';
@@ -28,6 +28,12 @@ class Game {
   }
   addEventListener(event, callback) {
     addStoreListener(event, callback);
+  }
+  destroy() {
+    destroyListeners();
+    var state = this.store.getState();
+    state.audioController.pause();
+    state.renderer.destroy();
   }
   render() {
     var state = this.store.getState();

@@ -22,13 +22,28 @@ var actions = {
     return Object.assign({}, prevState, {
       library: library
     });
+  },
+  uploadingSong: function(prevState) {
+    var library = prevState.library;
+    library.uploading = true;
+    return Object.assign({}, prevState, {
+      library: library
+    });
+  },
+  uploadedSong: function(prevState) {
+    var library = prevState.library;
+    library.uploading = false;
+    return Object.assign({}, prevState, {
+      library: library
+    });
   }
 };
 
 var mapStateToProps = function(state) {
   return {
     fetching: state.library.fetching,
-    songs: state.library.songs
+    songs: state.library.songs,
+    uploading: state.library.uploading
   };
 };
 
@@ -37,18 +52,16 @@ var mapDispatchToProps = function(dispatch) {
     onSubmit: function(e) {
       var form = new FormData(e.currentTarget);
       e.preventDefault();
-      fetch(
+      dispatch({type: 'uploadingSong', data: null});
+      return fetch(
         '/library',
       {
         method: 'POST',
         body: form
       })
-      .then((res) => {
-        return res.json();
-      })
       .then((data) => {
         // Should parse the song and send song data to be smartly added to state
-        document.location.reload();
+        dispatch({type: 'uploadedSong', data: null});
       });
     },
     fetchSongList: () => {

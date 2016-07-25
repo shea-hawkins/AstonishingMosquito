@@ -1,7 +1,7 @@
 // pass the game state into the modal
 // if game state is over, then show modal
-// if not, hide modal 
-// if stateName is gameOver then show this.refs.show 
+// if not, hide modal
+// if stateName is gameOver then show this.refs.show
 
 import React from 'react';
 import Modal from 'boron/OutlineModal';
@@ -21,7 +21,31 @@ var contentStyle = {
   textAlign: 'center'
 };
 
-export default class ModalExample extends React.Component {
+class LoadingModal extends React.Component {
+  componentDidMount() {
+    this.props.show ? this.refs.modal.show() : this.refs.modal.hide();
+  }
+  shouldComponentUpdate(nextProps) {
+    return nextProps.show !== this.props.show;
+  }
+  componentDidUpdate() {
+    this.props.show ? this.refs.modal.show() : this.refs.modal.hide();
+  }
+  render() {
+    console.log(this.props.show);
+    return (
+      <div>
+        <Modal ref="modal" modalStyle={modalStyle} backdropStyle={backdropStyle} contentStyle={contentStyle}>
+            <div>
+              <span id="loading" className="modalTitle"> Loading </span>
+            </div>
+        </Modal>
+      </div>
+    );
+  }
+}
+
+class GameOverModal extends React.Component {
   componentDidUpdate(prevProps) {
     if (this.props.status === 'GAMEOVER' && prevProps.status !== 'GAMEOVER') {
       this.showModal();
@@ -33,7 +57,7 @@ export default class ModalExample extends React.Component {
     return nextProps.status !== this.props.status;
   }
   showModal() {
-    this.refs.modal.show(); 
+    this.refs.modal.show();
   }
   hideModal() {
     this.refs.modal.hide();
@@ -43,21 +67,21 @@ export default class ModalExample extends React.Component {
         <div>
             <Modal ref="modal" modalStyle={modalStyle} backdropStyle={backdropStyle} contentStyle={contentStyle}>
                 <div>
-                  <span id="game-over"> Game Over </span>
+                  <span id="game-over" className="modalTitle"> Game Over </span>
                 </div>
                 <div id="try-again">
                   <div>
                     <div onClick={() => location.reload(true)}>
-                      <img src='assets/img/try-again.png' /> 
-                      <figcaption className="black-text"> Try Again </figcaption> 
+                      <img src='assets/img/try-again.png' />
+                      <figcaption className="black-text"> Try Again </figcaption>
                     </div>
                   </div>
                   <div>
                     <Link to={`/`}>
-                      <img src='assets/img/game-over.png' /> 
-                      <figcaption className="black-text"> Choose Another Song </figcaption> 
+                      <img src='assets/img/game-over.png' />
+                      <figcaption className="black-text"> Choose Another Song </figcaption>
                     </Link>
-                    
+
                   </div>
                 </div>
 
@@ -67,6 +91,4 @@ export default class ModalExample extends React.Component {
   }
 };
 
-// export default (props) => {
-  
-// }
+export { GameOverModal, LoadingModal };

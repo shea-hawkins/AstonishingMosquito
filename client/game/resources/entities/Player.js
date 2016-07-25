@@ -53,8 +53,8 @@ export default class Player extends Entity {
       var gameState = this.store.getState();
       if (this.state.stateName === 'JUMPING') {
         return;
-      } else if (gameState.lives <= 0) {
-        this.store.dispatch({type: 'gameOver', data: null});
+      } else if (gameState.lives <= 1) {
+        this.store.dispatch({type: 'updateGameState', data: 'GAMEOVER'});
       } else {
         this.store.dispatch({type: 'decrementLife', data: null});
       }

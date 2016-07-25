@@ -13,7 +13,8 @@ export default class AudioController extends Controller {
         store.dispatch({type: 'updateTime', data: {elapsed: time, duration: duration}});
     }, 250);
     // At the moment, only the first observable is the one generated
-    this.observables[0] = new RX.Subject();
+    this.observables['lowpass'] = new RX.Subject();
+    this.observables['visualization'] = new RX.Subject();
 
     this.node.src = 'songLibrary/' + opts.fileName;
 
@@ -22,11 +23,29 @@ export default class AudioController extends Controller {
     var delay = this.context.createDelay(2);
     this.source.connect(delay);
     delay.delayTime.value = .75;
-    delay.connect(this.context.destination);
+    var analyser = this.context.createAnalyser();
+    analyser.fftSize = 256;
+    delay.connect(analyser);
+    analyser.connect(this.context.destination);
+
+    this.subscribeSubjectToAnalyser(this.observables['visualization'], analyser);
+    this.store.dispatch({type: 'updateGameState', data: 'LOADING'});
     this.getIdealThreshold(opts.fileName).then(threshold => {
-      this.subscribeSubjectAtThreshold(this.observables[0], threshold);
-      this.node.play();
+      this.store.dispatch({type: 'updateGameState', data: 'PLAYING'});
+      this.subscribeSubjectAtThreshold(this.observables['lowpass'], threshold);
+      setTimeout(() => this.node.play(), 1000);
     });
+
+
+  }
+  subscribeSubjectToAnalyser(observable, analyser) {
+    var floatArray = new Float32Array(analyser.frequencyBinCount);
+    var getData = function( ){
+      analyser.getFloatFrequencyData(floatArray);
+      observable.next(floatArray);
+      requestAnimationFrame(getData);
+    }
+    getData();
   }
   subscribeSubjectAtThreshold(subject, threshold) {
     var filter = this.context.createBiquadFilter();

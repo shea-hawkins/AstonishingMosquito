@@ -12,7 +12,7 @@ var storeListeners = {
   'eventName': [(newState, action) => {
     // Callback is called with the newState and the action
   }]
-}
+};
 
 
 // All stage additions and removals must appear here.
@@ -35,6 +35,11 @@ var actions = {
     var lives = prevState.lives - 1;
     return Object.assign({}, prevState, {
       lives: lives
+    });
+  },
+  updateGameState: function(prevState, stateName) {
+    return Object.assign({}, prevState, {
+      stateName: stateName
     });
   },
   gameOver: function(prevState) {
@@ -82,4 +87,8 @@ var addStoreListener = function(event, fun) {
   }
 }
 
-export { getStore, addStoreListener };
+var destroyListeners = function() {
+  storeListeners = [];
+}
+
+export { getStore, addStoreListener, destroyListeners };

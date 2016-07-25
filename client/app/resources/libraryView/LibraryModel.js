@@ -53,7 +53,7 @@ var mapDispatchToProps = function(dispatch) {
       var form = new FormData(e.currentTarget);
       e.preventDefault();
       dispatch({type: 'uploadingSong', data: null});
-      fetch(
+      return fetch(
         '/library',
       {
         method: 'POST',
@@ -62,7 +62,6 @@ var mapDispatchToProps = function(dispatch) {
       .then((data) => {
         // Should parse the song and send song data to be smartly added to state
         dispatch({type: 'uploadedSong', data: null});
-        document.location.reload();
       });
     },
     fetchSongList: () => {

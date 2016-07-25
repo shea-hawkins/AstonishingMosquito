@@ -12,7 +12,7 @@ var storeListeners = {
   'eventName': [(newState, action) => {
     // Callback is called with the newState and the action
   }]
-}
+};
 
 
 // All stage additions and removals must appear here.

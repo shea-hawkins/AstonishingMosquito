@@ -1,6 +1,5 @@
 import React from 'react';
 import Game from '../../../game/Game.js';
-import GameRendererView from './GameRendererView.js';
 import {GameOverModal, LoadingModal} from '../stateless/Modals.js';
 import ScoreView from '../stateless/ScoreView.js';
 import SongQueueView from '../stateless/SongQueueView.js';
@@ -27,7 +26,7 @@ class GameView extends React.Component {
     return (
       <div className="game-view">
         <ScoreView time={this.props.elapsed} duration={this.props.duration} lives={this.props.lives} stateName={this.props.stateName}/>
-        <GameRendererView />
+        <div id="game" />
         <SongQueueView fileName={this.props.params.fileName} title={this.props.location.search}/>
         <LoadingModal show={this.props.stateName === 'LOADING'} />
         <GameOverModal status={this.props.stateName}/>

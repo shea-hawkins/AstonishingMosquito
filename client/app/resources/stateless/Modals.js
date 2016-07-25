@@ -1,12 +1,13 @@
-// pass the game state into the modal
-// if game state is over, then show modal
-// if not, hide modal
-// if stateName is gameOver then show this.refs.show
-
 import React from 'react';
 import Modal from 'boron/OutlineModal';
 import { Link } from 'react-router';
 
+/** pass the game state into the modal
+  * if game state is over, then show modal
+  * if not, hide modal
+  * if stateName is gameOver then show this.refs.show
+  */
+  
 var backdropStyle = {
   backgroundColor: 'black'
 };

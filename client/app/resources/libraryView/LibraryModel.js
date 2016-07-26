@@ -57,7 +57,7 @@ var mapDispatchToProps = function(dispatch) {
       e.preventDefault();
       // displays the loading modal
       dispatch({type: 'updateLibraryState', data: 'LOADING'});
-      postSong(song)
+      return postSong(song)
         .then(() => {
           // hides the loading modal
           dispatch({type: 'updateLibraryState', data: 'LOADED'});
@@ -65,7 +65,7 @@ var mapDispatchToProps = function(dispatch) {
     },
     fetchSongList: () => {
       dispatch({type: 'updateLibraryState', data: 'LOADING'});
-      fetchSongs()
+      return fetchSongs()
         .then((songs) => {
           dispatch({type: 'receiveSongList', data: songs});
           dispatch({type: 'updateLibraryState', data: 'LOADED'});

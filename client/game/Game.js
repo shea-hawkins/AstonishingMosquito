@@ -2,6 +2,7 @@ import { getStore, addStoreListener, destroyListeners } from './GameStore';
 import Beatbox from './resources/entities/Beatbox';
 import Player from './resources/entities/Player';
 import Wave from './resources/entities/Wave';
+import Visualizer from './resources/entities/Visualizer';
 import CollisionDetector from './resources/controllers/CollisionDetector';
 import AudioController from './resources/controllers/AudioController';
 
@@ -19,18 +20,18 @@ class Game {
     // Defining and passing store into controllers
     var collisionDetector = new CollisionDetector(this.store);
     var audioController = new AudioController(this.store, {node: this.node, fileName: song});
-    
-    // Adds game globals to store 
+
+    // Adds game globals to store
     this.store.dispatch({type: 'addGameItem', data: {key: 'renderer', val: renderer}});
     this.store.dispatch({type: 'addGameItem', data: {key: 'stage', val: stage}});
     this.store.dispatch({type: 'addGameItem', data: {key: 'collisionDetector', val: collisionDetector}});
     this.store.dispatch({type: 'addGameItem', data: {key: 'audioController', val: audioController}});
-    
+
     // Instantiates game enemy and player entities with store
     var beatbox = new Beatbox(this.store);
     var player = new Player(this.store);
-
-    // Render game 
+    var visualizer = new Visualizer(this.store);
+    // Render game
     this.render();
   }
 
@@ -59,7 +60,7 @@ class Game {
       }
     });
 
-    // Uses the PIXI render function to render the web GL window to the DOM 
+    // Uses the PIXI render function to render the web GL window to the DOM
     state.renderer.render(state.stage);
     // Uses the browser's built-in method to listen for an animation update
     window.requestAnimationFrame(this.render.bind(this));

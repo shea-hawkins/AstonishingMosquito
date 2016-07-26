@@ -71,9 +71,9 @@ Feel free to ask questions.
 
 ## Team AstonishingMosquito
 
-  - __Architecture and Code Review__: Shea Hawkins
-  - __Git Management and Deployment__: Jay Arella
-  - __Project Management__: Jennifer Ong
+  - __Architecture and Code Review__: [Shea Hawkins] (https://github.com/shea-hawkins)
+  - __Git Management and Deployment__: [Jay Arella] (https://github.com/arellaTV)
+  - __Project Management__: [Jennifer Ong] (https://github.com/jbarbettini)
 
 ## Contributions
 

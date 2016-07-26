@@ -2,12 +2,11 @@ import { createStore } from 'redux';
 import { actions as libraryActions } from './resources/libraryView/LibraryModel';
 import { actions as gameActions } from './resources/gameView/GameModel';
 
-var actions = Object.assign({}, libraryActions, gameActions);
-
+// Set default state of App
 var state = {
   library: {
     fetching: false,
-    songs: [{id: 1, title: 'Song 1', filename: '123'}, {id: 2, title: 'Song 2', filename: 'meow'}, {id: 3, title: 'Song 3', filename: 'yo'}, {id: 4, title: 'Song 4', filename: '123'}]
+    songs: []
   },
   game: {
     elapsed: 0,
@@ -17,15 +16,25 @@ var state = {
   }
 };
 
+// Consolidates actions from LibraryModel and GameModel into a new action object
+var actions = Object.assign({}, libraryActions, gameActions);
+
+/** Takes in a redux action and modifies the state based upon action
+  * Actions are defined previously from stateful component models
+  */
 var reducer = function(prevState = state, action) {
   if (actions[action.type]) {
-    return actions[action.type](prevState, action.data);
+    // Creates a new state object from action
+    return actions[action.type](prevState, action.data); 
   } else {
     console.warn(`Action ${action.type} doesn't exist.`);
     return prevState;
   }
 };
 
+/** Creates Store object using reducer function
+  * Refer to redux docs for further information 
+  */ 
 var Store = createStore(reducer);
 
 export default Store;

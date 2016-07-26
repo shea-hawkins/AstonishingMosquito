@@ -1,4 +1,4 @@
-import { getStore, addStoreListener, destroyListeners } from './GameModel';
+import { getStore, addStoreListener, destroyListeners } from './GameStore';
 import Beatbox from './resources/entities/Beatbox';
 import Player from './resources/entities/Player';
 import Wave from './resources/entities/Wave';
@@ -7,52 +7,62 @@ import AudioController from './resources/controllers/AudioController';
 
 class Game {
   constructor (id, song) {
-    this.node = document.getElementById(id);
+    // Create and bind PIXI renderer to DOM
     var renderer = new PIXI.autoDetectRenderer(1200, 600, {transparent: true});
+    var stage = new PIXI.Container();
+    this.node = document.getElementById(id);
     this.node.appendChild(renderer.view);
 
+    // Creates store for Game
     this.store = getStore();
 
+    // Defining and passing store into controllers
     var collisionDetector = new CollisionDetector(this.store);
     var audioController = new AudioController(this.store, {node: this.node, fileName: song});
-    var stage = new PIXI.Container();
-
+    
+    // Adds game globals to store 
+    this.store.dispatch({type: 'addGameItem', data: {key: 'renderer', val: renderer}});
+    this.store.dispatch({type: 'addGameItem', data: {key: 'stage', val: stage}});
     this.store.dispatch({type: 'addGameItem', data: {key: 'collisionDetector', val: collisionDetector}});
     this.store.dispatch({type: 'addGameItem', data: {key: 'audioController', val: audioController}});
-    this.store.dispatch({type: 'addGameItem', data: {key: 'stage', val: stage}});
-    this.store.dispatch({type: 'addGameItem', data: {key: 'renderer', val: renderer}});
-
+    
+    // Instantiates game enemy and player entities with store
     var beatbox = new Beatbox(this.store);
     var player = new Player(this.store);
+
+    // Render game 
     this.render();
   }
+
   addEventListener(event, callback) {
     addStoreListener(event, callback);
   }
+
   destroy() {
     destroyListeners();
     var state = this.store.getState();
     state.audioController.pause();
     state.renderer.destroy();
   }
+
   render() {
     var state = this.store.getState();
     if (state.stateName === 'GAMEOVER') {
       state.audioController.pause();
     }
+
+    // Calls the render function of all entities that share the Entity superclass (Wave, Beatbox, and Player)
     state.entities.forEach((entity) => {
-      // If the entity has left the screen or if it is currently
-      // awaiting grabage colleciton, renderable will be set to false.
       if (entity.renderable) {
-        // Collisions are detected before the next render, just in case the
-        // collision impacts the render or the render results in destruction of the
-        // object
         state.collisionDetector.detectCollisions(entity);
         entity.render();
       }
     });
+
+    // Uses the PIXI render function to render the web GL window to the DOM 
     state.renderer.render(state.stage);
-    requestAnimationFrame(this.render.bind(this));
+    // Uses the browser's built-in method to listen for an animation update
+    window.requestAnimationFrame(this.render.bind(this));
   }
 }
 

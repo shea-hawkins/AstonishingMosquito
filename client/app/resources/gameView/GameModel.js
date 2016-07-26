@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 
 var actions = {
-  updatingTime: function(prevState, data) {
+  updateTime: function(prevState, data) {
     var game = prevState.game;
     game.elapsed = data.elapsed;
     game.duration = data.duration;
@@ -9,7 +9,7 @@ var actions = {
       game: game
     });
   },
-  updatingLives: function(prevState, data) {
+  updateLives: function(prevState, data) {
     var game = prevState.game;
     game.lives = data;
     return Object.assign({}, prevState, {
@@ -37,10 +37,10 @@ var mapStateToProps = function(state) {
 var mapDispatchToProps = function(dispatch) {
   return {
     updateTime: (time) => {
-      dispatch({type: 'updatingTime', data: time });
+      dispatch({type: 'updateTime', data: time });
     },
     updateLives: (lives) => {
-      dispatch({type: 'updatingLives', data: lives });
+      dispatch({type: 'updateLives', data: lives });
     },
     updateGameState: (stateName) => {
       dispatch({type: 'updateGameState', data: stateName });

@@ -1,12 +1,10 @@
-// pass the game state into the modal
-// if game state is over, then show modal
-// if not, hide modal
-// if stateName is gameOver then show this.refs.show
-
 import React from 'react';
 import Modal from 'boron/OutlineModal';
 import { Link } from 'react-router';
-
+  
+/** Set modal UI
+  * See documentation for more information -- https://github.com/yuanyan/boron
+  */ 
 var backdropStyle = {
   backgroundColor: 'black'
 };
@@ -21,6 +19,9 @@ var contentStyle = {
   textAlign: 'center'
 };
 
+/** Pass the Library and Game state into the modal
+  * If stateName is 'LOADING', then show modal. Otherwise, hide modal
+  */
 class LoadingModal extends React.Component {
   componentDidMount() {
     this.props.show ? this.refs.modal.show() : this.refs.modal.hide();
@@ -45,6 +46,9 @@ class LoadingModal extends React.Component {
   }
 }
 
+/** Pass the Game state into the modal
+  * If game state is 'GAMEOVER', then show modal. Otherwise, hide modal
+  */
 class GameOverModal extends React.Component {
   componentDidUpdate(prevProps) {
     if (this.props.status === 'GAMEOVER' && prevProps.status !== 'GAMEOVER') {
@@ -64,29 +68,27 @@ class GameOverModal extends React.Component {
   }
   render() {
     return (
-        <div>
-            <Modal ref="modal" modalStyle={modalStyle} backdropStyle={backdropStyle} contentStyle={contentStyle}>
-                <div>
-                  <span id="game-over" className="modalTitle"> Game Over </span>
-                </div>
-                <div id="try-again">
-                  <div>
-                    <div onClick={() => location.reload(true)}>
-                      <img src='assets/img/try-again.png' />
-                      <figcaption className="black-text"> Try Again </figcaption>
-                    </div>
-                  </div>
-                  <div>
-                    <Link to={`/`}>
-                      <img src='assets/img/game-over.png' />
-                      <figcaption className="black-text"> Choose Another Song </figcaption>
-                    </Link>
-
-                  </div>
-                </div>
-
-            </Modal>
-        </div>
+      <div>
+        <Modal ref="modal" modalStyle={modalStyle} backdropStyle={backdropStyle} contentStyle={contentStyle}>
+          <div>
+            <span id="game-over" className="modalTitle"> Game Over </span>
+          </div>
+          <div id="try-again">
+            <div>
+              <div onClick={() => location.reload(true)}>
+                <img src='assets/img/try-again.png' />
+                <figcaption className="black-text"> Try Again </figcaption>
+              </div>
+            </div>
+            <div>
+              <Link to={`*`}>
+                <img src='assets/img/game-over.png' />
+                <figcaption className="black-text"> Choose Another Song </figcaption>
+              </Link>
+            </div>
+          </div>
+        </Modal>
+      </div>
     );
   }
 };

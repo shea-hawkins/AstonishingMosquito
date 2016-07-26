@@ -5,11 +5,14 @@ import Wave from '../entities/Wave';
 export default class CollisionDetector extends Controller {
   constructor(store) {
     super(store);
+    // Registered Entity is an entity that is watching for a collision
     this.registeredEntities = [];
   }
   detectCollisions(otherEntity) {
     this.registeredEntities.forEach(entity => {
+      // If the current entity is different than the other entity and they are colliding
       if (entity !== otherEntity && this.isColliding(entity, otherEntity)) {
+        // send an event to our observers
         this.observables[entity.id].next(otherEntity);
       }
     });
@@ -21,11 +24,14 @@ export default class CollisionDetector extends Controller {
     };
     // Assumes that entity is an instanceof player
     if (otherEntity instanceof Wave) {
+      // get the coordinates of the sprite and wave
       var waveGlobals = otherEntity.graphics.toGlobal(new PIXI.Point(0, 0));
       var spriteGlobals = entity.sprite.toGlobal(new PIXI.Point(0, 0));
       var width = entity.collisionWidth;
       var height = entity.collisionHeight;
       var corners = [];
+
+      // Establishing bounding box
       // top left corner:
       corners.push(new PIXI.Point(
         spriteGlobals.x - width / 2,
@@ -47,9 +53,9 @@ export default class CollisionDetector extends Controller {
         spriteGlobals.y + height / 2
       ));
 
-      // Sprite's closest corner is the one in which the distance calculation is
-      // smallest.
+      // Reduce corners to an array of [closest distance, furthest distance]
       var boundingCorners = corners.reduce((mem, corner) => {
+      // Calculates distance of all sprite's corners
         if (dist(corner, waveGlobals) < mem[0]) {
           mem[0] = dist(corner, waveGlobals);
         }
@@ -61,25 +67,22 @@ export default class CollisionDetector extends Controller {
       return boundingCorners;
     }
   }
+
   isColliding(entity, otherEntity) {
     if (otherEntity instanceof Wave) {
       var radius = otherEntity.radius;
-      // to find the radiius at which the wave is colliding withe the unit
-      // find the distance of the unit from the wave graphic center
-      // in order to keep track of the bounding box, find the distance of the spirite's
-      // closes corner from the center and the distance of the sprite's furthest corner.
 
-      // Sprite's closest corner is the one in which the distance calculation is
-      // smallest.
       var distances = this.calculateDistances(entity, otherEntity);
       return radius >= distances[0] && radius <= distances[1];
     }
   }
+
   registerEntitySubject(entity) {
     this.observables[entity.id] = new RX.Subject();
     this.registeredEntities.push(entity);
     return this.observables[entity.id];
   }
+
   unregisterEntitySubject(entity) {
     this.observables[entity.id].dispose();
     delete this.observables[entity.id];

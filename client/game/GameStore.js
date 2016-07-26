@@ -1,5 +1,6 @@
 import { createStore } from 'redux';
 
+// Set initial state
 var state = {
   entities: [],
   stage: {},
@@ -8,15 +9,15 @@ var state = {
   stateName: 'PLAYING'
 };
 
+// Object that keeps track of listeners to actions on the store 
 var storeListeners = {
   'eventName': [(newState, action) => {
     // Callback is called with the newState and the action
   }]
 };
 
-
-// All stage additions and removals must appear here.
-// this is so that the entity can be cleaned from every related game object
+/** List of all the actions used in the Game
+  */
 var actions = {
   addEntity: function(prevState, entity) {
     var entities = prevState.entities.slice();
@@ -61,11 +62,15 @@ var actions = {
   }
 };
 
+/** Takes in a redux action and modifies the state based upon action
+  * Actions are defined previously from stateful component models
+  * Will also call any of the listeners for the action 
+  */
 var reducer = function(prevState = state, action) {
   if (actions[action.type]) {
     var newState = actions[action.type](prevState, action.data);
+    // Calls the listeners if they exist
     if (storeListeners[action.type]) {
-      // Allows listeners to be added to the store for any action.
       storeListeners[action.type].forEach(listener => listener(newState, action.data));
     }
     return newState;
@@ -75,15 +80,20 @@ var reducer = function(prevState = state, action) {
   }
 };
 
+/** Creates the store using the reducer 
+  */ 
 var getStore = function() {
   return createStore(reducer);
 };
 
-var addStoreListener = function(event, fun) {
+/** Pushes the callback function onto the storeListener object 
+  * where the key is equal to the action type 
+  */ 
+var addStoreListener = function(event, func) {
   if (storeListeners[event]) {
-    storeListeners[event].push(fun);
+    storeListeners[event].push(func);
   } else {
-    storeListeners[event] = [fun];
+    storeListeners[event] = [func];
   }
 }
 

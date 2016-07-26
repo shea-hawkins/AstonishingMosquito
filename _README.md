@@ -1,54 +1,46 @@
-# Astonishing Mosquito
+# Synth
 
-> Are you someone who turns the sound off in games because it's just too annoying? What if it didn't need to be that way? In fact, what if the music was the deciding factor in how difficult your game play would be? The ChoZen syncs music with gaming, where game difficulty is directly determined by the user's chosen song and its tempo, tone, and frequency. Tee up your favorite playlist for hours of addictive play and listening. 
-
-## Team
-
-  - __Architecture and Code Review__: Shea Hawkins
-  - __Git Management and Deployment__: Jay Arella
-  - __Project Management__: Jennifer Ong
+Synth is the latest intersection between music and gaming. This addictive web game syncs game difficulty with your preferred playlist, and gives you an unique experience every time you load a new song. Tee up your favorite playlist for hours of addictive play and listening.
 
 ## Table of Contents
 
 1. [Usage](#Usage)
 1. [Requirements](#requirements)
-1. [Development](#development)
-    1. [Installing Dependencies](#installing-dependencies)
-    1. [Tasks](#tasks)
+1. [Installing Dependencies](#installing-dependencies)
 1. [Team](#team)
-1. [Contributing](#contributing)
+1. [Contribute](#contributions)
 
 ## Usage
 
-> Some usage instructions
+Start playing now at [http://www.synthgame.com] (http://www.synthgame.com)
 
 ## Requirements
 
-- Node 0.10.x
 - React
 - Redux
-- Pixie
+- Redis
+- PIXI
+- RXJS
+- NodeJS
 - Express
-- etc
 
-
-## Development
-
-### Installing Dependencies
+## Installing Dependencies
 
 From within the root directory:
 
-```sh
-sudo npm install -g bower
+```
 npm install
-bower install
+```
+```
+npm start
 ```
 
-### Roadmap
+## Team AstonishingMosquito
 
-View the project roadmap [here](LINK_TO_PROJECT_ISSUES)
+  - __Architecture and Code Review__: Shea Hawkins
+  - __Git Management and Deployment__: Jay Arella
+  - __Project Management__: Jennifer Ong
 
+## Contributions
 
-## Contributing
-
-See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
+See our [Style Guide](_STYLE-GUIDE.md) and [Contribution Guidelines](_CONTRIBUTING.md) for reference

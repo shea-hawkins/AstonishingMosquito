@@ -40,29 +40,20 @@ npm install
 npm start
 ```
 
-## Installing Dependencies
-
-From within the root directory:
-
-```
-npm install
-```
-```
-npm start
-```
 
 ## Possible Directions
-[] Multiplayer
-[] Collectable beatboxes (It's already mostly hooked up for movement)
-[] Leaderboards
-[] Multiple filter types (lowpass + bandpass + highpass filter, literally just setting a type)
-[] Magik
+- [ ] Multiplayer
+- [ ] Collectable beatboxes (It's already mostly hooked up for movement)
+- [ ] Leaderboards
+- [ ] Multiple filter types (lowpass + bandpass + highpass filter, literally just setting a type)
+- [ ] Magik
 
 ## Technical Improvements
 [] Store the ideal threshold (AudioController->GetIdealThreshold) in the database. This will improve load times ~75%.
 
 
 ## Architecture
+The client and the server are completely separate
 Implements a couple of core paradigms from http://gameprogrammingpatterns.com/ -- specifically the Observer pattern and the Command pattern.
 Webapp surrounding the game has a typical redux store and fetches songs from the server.
 The game also has a redux store in which all game entities and game controllers are stored. This is to avoid globals/singletons.

@@ -49,7 +49,7 @@ npm start
 - [ ] Magik
 
 ## Technical Improvements
-[] Store the ideal threshold (AudioController->GetIdealThreshold) in the database. This will improve load times ~75%.
+- [ ] Store the ideal threshold (AudioController->GetIdealThreshold) in the database. This will improve load times ~75%.
 
 
 ## Architecture

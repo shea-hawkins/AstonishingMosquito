@@ -7,7 +7,7 @@ Synth is the latest intersection between music and gaming. This addictive web ga
 1. [Usage](#Usage)
 1. [Requirements](#requirements)
 1. [Installing Dependencies](#installing-dependencies)
-1. [Team](#team)
+1. [Team](#team-astonishingmosquito)
 1. [Contribute](#contributions)
 
 ## Usage

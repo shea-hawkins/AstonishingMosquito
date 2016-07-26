@@ -17,7 +17,7 @@ export default class AudioController extends Controller {
 
     // Define lowpass and visualization observables
     this.observables['lowpass'] = new RX.Subject();
-    this.observables['visualization'] = new RX.Subject();
+    this.observables['visualizer'] = new RX.Subject();
 
     this.node.src = 'songLibrary/' + opts.fileName;
 
@@ -32,13 +32,12 @@ export default class AudioController extends Controller {
     delay.delayTime.value = .75;
     // Create a new analyzer that generates the information for the visualizer
     var analyser = this.context.createAnalyser();
-    analyser.fftSize = 256;
+    analyser.fftSize = 128;
     delay.connect(analyser);
     // Finally, connect the analyzer to the speakers
     analyser.connect(this.context.destination);
 
-    // Sends visualization events to the visualization observable
-    this.subscribeSubjectToAnalyser(this.observables['visualization'], analyser);
+    this.subscribeSubjectToAnalyser(this.observables['visualizer'], analyser);
     this.store.dispatch({type: 'updateGameState', data: 'LOADING'});
     this.getIdealThreshold(opts.fileName).then(threshold => {
       this.store.dispatch({type: 'updateGameState', data: 'PLAYING'});

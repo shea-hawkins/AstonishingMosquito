@@ -9,7 +9,7 @@ var actions = {
       library: library
     });
   },
-  // Take data received from redis 
+  // Take data received from redis
   receiveSongList: function(prevState, data) {
     var library = prevState.library;
     library.songs = data;
@@ -53,19 +53,19 @@ var mapDispatchToProps = function(dispatch) {
   return {
     onSubmit: function(e) {
       var song = new FormData(e.currentTarget);
-      // Stops browser from refreshing after submit button is clicked 
-      e.preventDefault(); 
-      // displays the loading modal 
+      // Stops browser from refreshing after submit button is clicked
+      e.preventDefault();
+      // displays the loading modal
       dispatch({type: 'updateLibraryState', data: 'LOADING'});
-      postSong(song)
+      return postSong(song)
         .then(() => {
-          // hides the loading modal 
+          // hides the loading modal
           dispatch({type: 'updateLibraryState', data: 'LOADED'});
         });
     },
     fetchSongList: () => {
       dispatch({type: 'updateLibraryState', data: 'LOADING'});
-      fetchSongs()
+      return fetchSongs()
         .then((songs) => {
           dispatch({type: 'receiveSongList', data: songs});
           dispatch({type: 'updateLibraryState', data: 'LOADED'});

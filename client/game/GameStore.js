@@ -9,7 +9,7 @@ var state = {
   stateName: 'PLAYING'
 };
 
-// Object that keeps track of listeners to actions on the store 
+// Object that keeps track of listeners to actions on the store
 var storeListeners = {
   'eventName': [(newState, action) => {
     // Callback is called with the newState and the action
@@ -64,7 +64,7 @@ var actions = {
 
 /** Takes in a redux action and modifies the state based upon action
   * Actions are defined previously from stateful component models
-  * Will also call any of the listeners for the action 
+  * Will also call any of the listeners for the action
   */
 var reducer = function(prevState = state, action) {
   if (actions[action.type]) {
@@ -80,15 +80,15 @@ var reducer = function(prevState = state, action) {
   }
 };
 
-/** Creates the store using the reducer 
-  */ 
+/** Creates the store using the reducer
+  */
 var getStore = function() {
   return createStore(reducer);
 };
 
-/** Pushes the callback function onto the storeListener object 
-  * where the key is equal to the action type 
-  */ 
+/** Pushes the callback function onto the storeListener object
+  * where the key is equal to the action type
+  */
 var addStoreListener = function(event, func) {
   if (storeListeners[event]) {
     storeListeners[event].push(func);

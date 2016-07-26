@@ -21,7 +21,7 @@ class LibraryView extends React.Component {
       <div className="library-view">
         <div id="upload">
           <h2>Upload a Song</h2>
-          <SongUploadView onSubmit={onFormSubmit.bind(this)} />
+          <SongUploadView onSubmit={this.onFormSubmit.bind(this)} />
         </div>
         <div id="library-list">
           <h2>Or Select a Favorite</h2>

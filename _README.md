@@ -26,6 +26,22 @@ Start playing now at [http://www.synthgame.com] (http://www.synthgame.com)
 
 ## Installing Dependencies
 
+Install Redis
+```
+brew install redis
+```
+
+then, from within the root directory:
+
+```
+npm install
+```
+```
+npm start
+```
+
+## Installing Dependencies
+
 From within the root directory:
 
 ```
@@ -34,6 +50,33 @@ npm install
 ```
 npm start
 ```
+
+## Possible Directions
+[] Multiplayer
+[] Collectable beatboxes (It's already mostly hooked up for movement)
+[] Leaderboards
+[] Multiple filter types (lowpass + bandpass + highpass filter, literally just setting a type)
+[] Magik
+
+## Technical Improvements
+[] Store the ideal threshold (AudioController->GetIdealThreshold) in the database. This will improve load times ~75%.
+
+
+## Architecture
+Implements a couple of core paradigms from http://gameprogrammingpatterns.com/ -- specifically the Observer pattern and the Command pattern.
+Webapp surrounding the game has a typical redux store and fetches songs from the server.
+The game also has a redux store in which all game entities and game controllers are stored. This is to avoid globals/singletons.
+Webapp listens to the Game store via the Game->addEventListener method.
+Feel free to ask questions.
+
+## Orienting in the Codebase
+
+1. Start at client/index.js, App, AppStore
+2. navigate to the clientapp directory, familiarize with LibraryView, LibraryModel
+3. Familiarize with GameView, GameModel
+4. Navigate to the client/game directory, familiarize with Game.js, GameStore
+5. Entity, Player, Beatbox, Wave
+6. Controller, CollisionDetector, AudioController
 
 ## Team AstonishingMosquito
 
